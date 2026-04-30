@@ -1,89 +1,77 @@
 {
   "entities": [
-    "generic drugs (tier 1) (retail & mail order)",
-    "childbirth/delivery professional services",
-    "ultrasound",
-    "prescription drug coverage",
-    "occupational therapy services",
-    "primary care visit",
-    "private duty nursing",
-    "chiropractic care",
-    "infertility treatment",
-    "routine foot care",
-    "weight loss programs",
-    "hospital stay",
-    "family",
-    "diagnostic test (x-ray, blood work)",
-    "children's glasses",
-    "anesthesia",
-    "urgent care",
-    "facility fee (e.g., ambulatory surgery center)",
-    "outpatient services",
-    "maternity care",
-    "childbirth/delivery facility services",
-    "durable medical equipment",
-    "children's dental check-up",
-    "outpatient surgery",
-    "network",
-    "dental care",
     "skilled nursing care",
-    "premiums",
-    "imaging (ct/pet scans, mris)",
-    "preferred brand drugs (tier 2) (retail & mail order)",
-    "children's eye exam",
-    "routine eye care (adult)",
-    "non-preferred brand drugs (tier 3)",
-    "mia",
-    "home health care",
-    "emergency room care",
-    "inpatient services",
-    "acupuncture",
     "ppo",
-    "plan",
-    "plan option 1",
-    "out-of-pocket limit",
-    "preventive care/screening/immunization",
-    "rehabilitation services",
-    "habilitation services",
-    "preventive care",
-    "coinsurance",
-    "balance-billed charges",
-    "mia's simple fracture",
-    "pregnancy",
-    "preauthorization",
-    "emergency medical transportation",
     "long term care",
-    "cosmetic surgery",
-    "facility fee (e.g., hospital room)",
-    "out-of-network provider",
-    "copay",
-    "network provider",
-    "specialty drugs (tier 4)",
+    "preferred brand drugs (tier 2) (retail & mail order)",
+    "emergency room care",
+    "anesthesia",
+    "balance-billed charges",
+    "pregnancy",
     "physician/surgeon fees",
-    "out-of-network",
-    "preventive services",
-    "office visits",
-    "hospice services",
-    "non-emergency care outside the u.s.",
+    "non-preferred brand drugs (tier 3)",
+    "generic drugs (tier 1) (retail & mail order)",
+    "mental health services",
+    "hospital stay",
     "specialist visit",
-    "deductible"
+    "weight loss programs",
+    "acupuncture",
+    "preauthorization",
+    "plan",
+    "behavioral health services",
+    "out-of-network provider",
+    "routine eye care (adult)",
+    "routine foot care",
+    "diagnostic test (x-ray, blood work)",
+    "childbirth/delivery professional services",
+    "substance abuse services",
+    "mia",
+    "family",
+    "inpatient services",
+    "children's dental check-up",
+    "deductible",
+    "dental care",
+    "infertility treatment",
+    "copay",
+    "facility fee (e.g., hospital room)",
+    "childbirth/delivery facility services",
+    "cosmetic surgery",
+    "out-of-network",
+    "occupational therapy services",
+    "referral",
+    "coinsurance",
+    "specialty drugs (tier 4)",
+    "maternity care",
+    "mia's simple fracture",
+    "network provider",
+    "premiums",
+    "children's glasses",
+    "children's eye exam",
+    "plan option 1",
+    "network",
+    "imaging (ct/pet scans, mris)",
+    "urgent care",
+    "habilitation services",
+    "private duty nursing",
+    "primary care visit",
+    "outpatient surgery",
+    "outpatient services",
+    "facility fee (e.g., ambulatory surgery center)",
+    "preventive care/screening/immunization",
+    "prescription drug coverage",
+    "office visits",
+    "home health care",
+    "rehabilitation services",
+    "hospice services",
+    "emergency medical transportation",
+    "preventive care",
+    "chiropractic care",
+    "non-emergency care outside the u.s.",
+    "durable medical equipment",
+    "ultrasound",
+    "out-of-pocket limit"
   ],
   "relationships": [
-    [
-      "outpatient services",
-      "has_copay",
-      "$35"
-    ],
-    [
-      "urgent care",
-      "has_copay",
-      "$30"
-    ],
-    [
-      "generic drugs (tier 1) (retail & mail order)",
-      "has_copay",
-      "$10"
-    ],
     [
       "office visits",
       "has_coinsurance",
@@ -95,29 +83,44 @@
       "40%"
     ],
     [
-      "emergency medical transportation",
-      "has_coinsurance",
-      "20%"
+      "private duty nursing",
+      "covers",
+      "plan"
     ],
     [
-      "facility fee (e.g., hospital room)",
+      "urgent care",
+      "has_copay",
+      "$30"
+    ],
+    [
+      "urgent care",
+      "has_coinsurance",
+      "40%"
+    ],
+    [
+      "outpatient surgery",
       "requires",
       "preauthorization"
     ],
     [
-      "skilled nursing care",
-      "has_coinsurance",
-      "20%"
+      "occupational therapy services",
+      "has_deductible",
+      "$300"
+    ],
+    [
+      "deductible",
+      "applies_to",
+      "overall deductible"
+    ],
+    [
+      "durable medical equipment",
+      "not_covered",
+      "vehicle modifications"
     ],
     [
       "specialist visit",
-      "has_copay",
-      "$50"
-    ],
-    [
-      "physician/surgeon fees",
-      "has_coinsurance",
-      "20%"
+      "requires",
+      "preauthorization"
     ],
     [
       "non-emergency care outside the u.s.",
@@ -125,59 +128,19 @@
       "plan"
     ],
     [
-      "outpatient services",
-      "has_coinsurance",
-      "20%"
-    ],
-    [
-      "private duty nursing",
-      "covers",
-      "plan"
-    ],
-    [
-      "outpatient surgery",
-      "reduces_benefit",
-      "50%"
-    ],
-    [
-      "childbirth/delivery professional services",
-      "has_coinsurance",
-      "40%"
-    ],
-    [
-      "facility fee (e.g., hospital room)",
-      "has_coinsurance",
-      "40%"
-    ],
-    [
-      "preventive care/screening/immunization",
-      "has_copay",
-      "no charge"
-    ],
-    [
-      "out-of-network provider",
-      "applies_to",
-      "higher costs"
+      "children's eye exam",
+      "has_limit",
+      "one exam/year"
     ],
     [
       "hospice services",
-      "reduces_benefit",
-      "50%"
+      "requires",
+      "preauthorization"
     ],
     [
-      "routine eye care (adult)",
-      "covers",
-      "plan"
-    ],
-    [
-      "imaging (ct/pet scans, mris)",
-      "has_copay",
-      "$50"
-    ],
-    [
-      "non-preferred brand drugs (tier 3)",
+      "durable medical equipment",
       "has_coinsurance",
-      "40%"
+      "20%"
     ],
     [
       "physician/surgeon fees",
@@ -185,29 +148,54 @@
       "40%"
     ],
     [
-      "rehabilitation services",
-      "has_limit",
-      "60 visits/calendar year"
-    ],
-    [
-      "outpatient services",
-      "has_coinsurance",
-      "40%"
-    ],
-    [
-      "emergency room care",
+      "inpatient services",
       "has_coinsurance",
       "20%"
     ],
     [
-      "diagnostic test (x-ray, blood work)",
-      "has_copay",
-      "$10"
+      "children's glasses",
+      "has_coinsurance",
+      "20%"
     ],
     [
       "home health care",
       "has_limit",
-      "60 visits/year"
+      "60 visits/calendar year"
+    ],
+    [
+      "specialty drugs (tier 4)",
+      "has_coinsurance",
+      "50%"
+    ],
+    [
+      "facility fee (e.g., ambulatory surgery center)",
+      "has_copay",
+      "$100"
+    ],
+    [
+      "cosmetic surgery",
+      "not_covered",
+      "plan"
+    ],
+    [
+      "emergency room care",
+      "has_coinsurance",
+      "40%"
+    ],
+    [
+      "out-of-network provider",
+      "applies_to",
+      "higher costs"
+    ],
+    [
+      "office visits",
+      "has_coinsurance",
+      "20%"
+    ],
+    [
+      "childbirth/delivery facility services",
+      "has_coinsurance",
+      "20%"
     ],
     [
       "primary care visit",
@@ -215,19 +203,34 @@
       "20%"
     ],
     [
-      "cosmetic surgery",
-      "not_covered",
-      "plan option 1"
+      "outpatient services",
+      "has_coinsurance",
+      "40%"
     ],
     [
-      "children's eye exam",
-      "has_copay",
-      "$35"
+      "hospice services",
+      "reduces_benefit",
+      "50%"
     ],
     [
-      "plan option 1",
+      "prescription drug coverage",
+      "has_deductible",
+      "$300"
+    ],
+    [
+      "acupuncture",
       "covers",
-      "emergency room care"
+      "plan"
+    ],
+    [
+      "emergency medical transportation",
+      "has_coinsurance",
+      "20%"
+    ],
+    [
+      "hospice services",
+      "has_coinsurance",
+      "20%"
     ],
     [
       "primary care visit",
@@ -240,64 +243,14 @@
       "20%"
     ],
     [
+      "long term care",
+      "not_covered",
+      "plan"
+    ],
+    [
       "weight loss programs",
       "not_covered",
       "plan"
-    ],
-    [
-      "specialist visit",
-      "has_coinsurance",
-      "40%"
-    ],
-    [
-      "chiropractic care",
-      "covers",
-      "plan"
-    ],
-    [
-      "durable medical equipment",
-      "has_coinsurance",
-      "20%"
-    ],
-    [
-      "durable medical equipment",
-      "not_covered",
-      "vehicle modifications, home modifications, exercise, and bathroom equipment"
-    ],
-    [
-      "specialist visit",
-      "requires",
-      "preauthorization"
-    ],
-    [
-      "routine foot care",
-      "covers",
-      "plan"
-    ],
-    [
-      "rehabilitation services",
-      "has_coinsurance",
-      "20%"
-    ],
-    [
-      "cosmetic surgery",
-      "not_covered",
-      "plan"
-    ],
-    [
-      "network provider",
-      "applies_to",
-      "lower costs"
-    ],
-    [
-      "inpatient services",
-      "has_coinsurance",
-      "20%"
-    ],
-    [
-      "occupational therapy services",
-      "has_deductible",
-      "$300"
     ],
     [
       "preferred brand drugs (tier 2) (retail & mail order)",
@@ -305,39 +258,9 @@
       "$30"
     ],
     [
-      "urgent care",
-      "has_coinsurance",
-      "40%"
-    ],
-    [
-      "prescription drug coverage",
-      "has_deductible",
-      "$300"
-    ],
-    [
-      "children's eye exam",
-      "has_limit",
-      "one exam/year"
-    ],
-    [
-      "children's glasses",
-      "has_limit",
-      "one pair of glasses/year"
-    ],
-    [
-      "preauthorization",
-      "reduces_benefit",
-      "50%"
-    ],
-    [
-      "long term care",
+      "durable medical equipment",
       "not_covered",
-      "plan"
-    ],
-    [
-      "hospice services",
-      "has_coinsurance",
-      "20%"
+      "bathroom equipment"
     ],
     [
       "dental care",
@@ -345,54 +268,34 @@
       "plan"
     ],
     [
-      "children's dental check-up",
-      "has_copay",
-      "no charge"
-    ],
-    [
-      "outpatient surgery",
-      "requires",
-      "preauthorization"
-    ],
-    [
-      "home health care",
-      "has_limit",
-      "60 visits/calendar year"
-    ],
-    [
-      "inpatient services",
+      "facility fee (e.g., hospital room)",
       "has_coinsurance",
       "40%"
     ],
     [
-      "office visits",
-      "has_coinsurance",
-      "20%"
-    ],
-    [
-      "plan option 1",
-      "requires",
-      "preauthorization"
-    ],
-    [
-      "facility fee (e.g., ambulatory surgery center)",
-      "has_copay",
-      "$100"
-    ],
-    [
-      "childbirth/delivery facility services",
-      "has_coinsurance",
-      "20%"
-    ],
-    [
-      "acupuncture",
+      "routine foot care",
       "covers",
       "plan"
     ],
     [
-      "plan option 1",
-      "covers",
-      "primary care visit"
+      "physician/surgeon fees",
+      "has_coinsurance",
+      "20%"
+    ],
+    [
+      "children's glasses",
+      "has_limit",
+      "one pair/year"
+    ],
+    [
+      "diagnostic test (x-ray, blood work)",
+      "has_copay",
+      "$10"
+    ],
+    [
+      "preventive care/screening/immunization",
+      "has_copay",
+      "no charge"
     ],
     [
       "infertility treatment",
@@ -400,9 +303,109 @@
       "plan"
     ],
     [
-      "home health care",
+      "facility fee (e.g., hospital room)",
+      "requires",
+      "preauthorization"
+    ],
+    [
+      "childbirth/delivery professional services",
+      "has_coinsurance",
+      "40%"
+    ],
+    [
+      "emergency room care",
       "has_coinsurance",
       "20%"
+    ],
+    [
+      "durable medical equipment",
+      "not_covered",
+      "exercise equipment"
+    ],
+    [
+      "generic drugs (tier 1) (retail & mail order)",
+      "has_copay",
+      "$10"
+    ],
+    [
+      "chiropractic care",
+      "covers",
+      "plan"
+    ],
+    [
+      "preauthorization",
+      "reduces_benefit",
+      "50%"
+    ],
+    [
+      "outpatient services",
+      "has_coinsurance",
+      "20%"
+    ],
+    [
+      "network provider",
+      "applies_to",
+      "lower costs"
+    ],
+    [
+      "rehabilitation services",
+      "has_limit",
+      "60 visits/calendar year"
+    ],
+    [
+      "routine eye care (adult)",
+      "covers",
+      "plan"
+    ],
+    [
+      "home health care",
+      "has_limit",
+      "60 visits/year"
+    ],
+    [
+      "specialist visit",
+      "has_coinsurance",
+      "40%"
+    ],
+    [
+      "imaging (ct/pet scans, mris)",
+      "has_copay",
+      "$50"
+    ],
+    [
+      "plan option 1",
+      "covers",
+      "emergency room care"
+    ],
+    [
+      "durable medical equipment",
+      "not_covered",
+      "home modifications"
+    ],
+    [
+      "plan option 1",
+      "covers",
+      "primary care visit"
+    ],
+    [
+      "non-preferred brand drugs (tier 3)",
+      "has_coinsurance",
+      "40%"
+    ],
+    [
+      "outpatient services",
+      "has_copay",
+      "$35"
+    ],
+    [
+      "children's dental check-up",
+      "has_copay",
+      "no charge"
+    ],
+    [
+      "plan option 1",
+      "requires",
+      "preauthorization"
     ],
     [
       "facility fee (e.g., hospital room)",
@@ -410,14 +413,34 @@
       "20%"
     ],
     [
-      "children's glasses",
+      "specialist visit",
+      "has_copay",
+      "$50"
+    ],
+    [
+      "skilled nursing care",
       "has_coinsurance",
       "20%"
     ],
     [
-      "anesthesia",
+      "children's eye exam",
+      "has_copay",
+      "$35"
+    ],
+    [
+      "out-of-pocket limit",
+      "applies_to",
+      "maximum out-of-pocket expenses"
+    ],
+    [
+      "inpatient services",
       "has_coinsurance",
-      "50%"
+      "40%"
+    ],
+    [
+      "rehabilitation services",
+      "has_coinsurance",
+      "20%"
     ],
     [
       "skilled nursing care",
@@ -430,141 +453,21 @@
       "20%"
     ],
     [
-      "specialty drugs (tier 4)",
+      "home health care",
       "has_coinsurance",
-      "50%"
-    ],
-    [
-      "hospice services",
-      "requires",
-      "preauthorization"
-    ],
-    [
-      "emergency room care",
-      "has_deductible",
-      "$500"
+      "20%"
     ]
   ],
   "attributes": [
-    [
-      "out-of-pocket limit",
-      "out-of-network individual",
-      "$4,000"
-    ],
-    [
-      "chiropractic care",
-      "type",
-      "other_covered_service"
-    ],
-    [
-      "prescription drug coverage",
-      "deductible",
-      "$300"
-    ],
-    [
-      "weight loss programs",
-      "type",
-      "other_covered_service"
-    ],
-    [
-      "out-of-pocket limit",
-      "individual",
-      "$2,500"
-    ],
-    [
-      "coinsurance",
-      "emergency room care",
-      "40%"
-    ],
-    [
-      "out-of-network provider",
-      "coinsurance",
-      "50%"
-    ],
-    [
-      "long term care",
-      "type",
-      "other_covered_service"
-    ],
-    [
-      "deductible",
-      "individual",
-      ""
-    ],
-    [
-      "private duty nursing",
-      "type",
-      "other_covered_service"
-    ],
-    [
-      "acupuncture",
-      "type",
-      "other_covered_service"
-    ],
-    [
-      "copay",
-      "primary care visit",
-      "$35"
-    ],
-    [
-      "limit",
-      "glasses",
-      "one pair"
-    ],
-    [
-      "limit",
-      "visits",
-      "60"
-    ],
-    [
-      "out-of-pocket limit",
-      "out-of-network family",
-      "$8,000"
-    ],
-    [
-      "infertility treatment",
-      "type",
-      "other_covered_service"
-    ],
-    [
-      "routine eye care (adult)",
-      "type",
-      "other_covered_service"
-    ],
     [
       "non-emergency care outside the u.s.",
       "type",
       "other_covered_service"
     ],
     [
-      "copay",
-      "amount",
-      "$35"
-    ],
-    [
-      "out-of-pocket limit",
-      "family",
-      "$5,000"
-    ],
-    [
-      "coinsurance",
-      "percentage",
-      "20%"
-    ],
-    [
-      "limit",
-      "exams",
-      "one"
-    ],
-    [
-      "out-of-network",
-      "cost",
+      "primary care visit",
+      "out-of-network cost",
       "40% coinsurance"
-    ],
-    [
-      "deductible",
-      "family",
-      "$1,000"
     ],
     [
       "routine foot care",
@@ -572,14 +475,69 @@
       "other_covered_service"
     ],
     [
-      "deductible",
-      "individual",
-      "$500"
+      "specialist visit",
+      "out-of-network cost",
+      "40% coinsurance"
     ],
     [
-      "dental care",
+      "copay",
+      "amount",
+      "$35"
+    ],
+    [
+      "long term care",
       "type",
       "other_covered_service"
+    ],
+    [
+      "specialist visit",
+      "network cost",
+      "$50 copay"
+    ],
+    [
+      "weight loss programs",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "coinsurance",
+      "emergency room care",
+      "40%"
+    ],
+    [
+      "limit",
+      "home health care",
+      "60 visits/year"
+    ],
+    [
+      "acupuncture",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "out-of-pocket limit",
+      "out-of-network family",
+      "$8,000"
+    ],
+    [
+      "chiropractic care",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "out-of-pocket limit",
+      "family",
+      "$5,000"
+    ],
+    [
+      "out-of-pocket limit",
+      "out-of-network individual",
+      "$4,000"
+    ],
+    [
+      "deductible",
+      "amount",
+      ""
     ],
     [
       "network",
@@ -587,9 +545,79 @@
       "20% coinsurance"
     ],
     [
+      "deductible",
+      "family",
+      "$1,000"
+    ],
+    [
+      "infertility treatment",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "private duty nursing",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "out-of-network",
+      "cost",
+      "40% coinsurance"
+    ],
+    [
       "occupational therapy services",
       "deductible",
       "$300"
+    ],
+    [
+      "deductible",
+      "individual",
+      "$500"
+    ],
+    [
+      "coinsurance",
+      "percentage",
+      "20%"
+    ],
+    [
+      "dental care",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "preauthorization",
+      "required",
+      "True"
+    ],
+    [
+      "prescription drug coverage",
+      "deductible",
+      "$300"
+    ],
+    [
+      "out-of-pocket limit",
+      "individual",
+      "$2,500"
+    ],
+    [
+      "primary care visit",
+      "network cost",
+      "$35 copay"
+    ],
+    [
+      "routine eye care (adult)",
+      "type",
+      "other_covered_service"
+    ],
+    [
+      "preauthorization",
+      "reduction",
+      "50%"
+    ],
+    [
+      "copay",
+      "primary care visit",
+      "$35"
     ]
   ]
 }

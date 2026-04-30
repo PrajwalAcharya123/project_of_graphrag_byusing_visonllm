@@ -1,13 +1,3 @@
-REL [OFFERS] × 30 pairs
-REL [COVERS] × 25 pairs
-REL [NOT_COVERED] × 9 pairs
-REL [HAS_COINSURANCE] × 3 pairs
-REL [REQUIRES] × 8 pairs
-REL [LIMITS] × 4 pairs
-REL [HAS_COPAY] × 5 pairs
-REL [APPLIES_TO] × 4 pairs
-REL [EXCLUDES] × 1 pairs
-ATTR: 55 entities updated with properties
 children's eye exam -[HAS_LIMIT]-> one exam/year
 facility fee (e.g., ambulatory surgery center) -[HAS_COPAY]-> $100
 out-of-pocket limit -[APPLIES_TO]-> maximum out-of-pocket expenses
@@ -234,3 +224,112 @@ deductible -[INDIVIDUAL]-> $500
 dental care -[TYPE]-> other_covered_service
 network -[COST]-> 20% coinsurance
 occupational therapy services -[DEDUCTIBLE]-> $300
+office visits -[HAS_COINSURANCE]-> 40%
+childbirth/delivery facility services -[HAS_COINSURANCE]-> 40%
+private duty nursing -[COVERS]-> plan
+urgent care -[HAS_COPAY]-> $30
+urgent care -[HAS_COINSURANCE]-> 40%
+outpatient surgery -[REQUIRES]-> preauthorization
+occupational therapy services -[HAS_DEDUCTIBLE]-> $300
+deductible -[APPLIES_TO]-> overall deductible
+durable medical equipment -[NOT_COVERED]-> vehicle modifications
+specialist visit -[REQUIRES]-> preauthorization
+non-emergency care outside the u.s. -[NOT_COVERED]-> plan
+children's eye exam -[HAS_LIMIT]-> one exam/year
+hospice services -[REQUIRES]-> preauthorization
+durable medical equipment -[HAS_COINSURANCE]-> 20%
+physician/surgeon fees -[HAS_COINSURANCE]-> 40%
+inpatient services -[HAS_COINSURANCE]-> 20%
+children's glasses -[HAS_COINSURANCE]-> 20%
+home health care -[HAS_LIMIT]-> 60 visits/calendar year
+specialty drugs (tier 4) -[HAS_COINSURANCE]-> 50%
+facility fee (e.g., ambulatory surgery center) -[HAS_COPAY]-> $100
+cosmetic surgery -[NOT_COVERED]-> plan
+emergency room care -[HAS_COINSURANCE]-> 40%
+out-of-network provider -[APPLIES_TO]-> higher costs
+office visits -[HAS_COINSURANCE]-> 20%
+childbirth/delivery facility services -[HAS_COINSURANCE]-> 20%
+primary care visit -[HAS_COINSURANCE]-> 20%
+outpatient services -[HAS_COINSURANCE]-> 40%
+hospice services -[REDUCES_BENEFIT]-> 50%
+prescription drug coverage -[HAS_DEDUCTIBLE]-> $300
+acupuncture -[COVERS]-> plan
+emergency medical transportation -[HAS_COINSURANCE]-> 20%
+hospice services -[HAS_COINSURANCE]-> 20%
+primary care visit -[HAS_COPAY]-> $35
+habilitation services -[HAS_COINSURANCE]-> 20%
+long term care -[NOT_COVERED]-> plan
+weight loss programs -[NOT_COVERED]-> plan
+preferred brand drugs (tier 2) (retail & mail order) -[HAS_COPAY]-> $30
+durable medical equipment -[NOT_COVERED]-> bathroom equipment
+dental care -[COVERS]-> plan
+facility fee (e.g., hospital room) -[HAS_COINSURANCE]-> 40%
+routine foot care -[COVERS]-> plan
+physician/surgeon fees -[HAS_COINSURANCE]-> 20%
+children's glasses -[HAS_LIMIT]-> one pair/year
+diagnostic test (x-ray, blood work) -[HAS_COPAY]-> $10
+preventive care/screening/immunization -[HAS_COPAY]-> no charge
+infertility treatment -[NOT_COVERED]-> plan
+facility fee (e.g., hospital room) -[REQUIRES]-> preauthorization
+childbirth/delivery professional services -[HAS_COINSURANCE]-> 40%
+emergency room care -[HAS_COINSURANCE]-> 20%
+durable medical equipment -[NOT_COVERED]-> exercise equipment
+generic drugs (tier 1) (retail & mail order) -[HAS_COPAY]-> $10
+chiropractic care -[COVERS]-> plan
+preauthorization -[REDUCES_BENEFIT]-> 50%
+outpatient services -[HAS_COINSURANCE]-> 20%
+network provider -[APPLIES_TO]-> lower costs
+rehabilitation services -[HAS_LIMIT]-> 60 visits/calendar year
+routine eye care (adult) -[COVERS]-> plan
+home health care -[HAS_LIMIT]-> 60 visits/year
+specialist visit -[HAS_COINSURANCE]-> 40%
+imaging (ct/pet scans, mris) -[HAS_COPAY]-> $50
+plan option 1 -[COVERS]-> emergency room care
+durable medical equipment -[NOT_COVERED]-> home modifications
+plan option 1 -[COVERS]-> primary care visit
+non-preferred brand drugs (tier 3) -[HAS_COINSURANCE]-> 40%
+outpatient services -[HAS_COPAY]-> $35
+children's dental check-up -[HAS_COPAY]-> no charge
+plan option 1 -[REQUIRES]-> preauthorization
+facility fee (e.g., hospital room) -[HAS_COINSURANCE]-> 20%
+specialist visit -[HAS_COPAY]-> $50
+skilled nursing care -[HAS_COINSURANCE]-> 20%
+children's eye exam -[HAS_COPAY]-> $35
+out-of-pocket limit -[APPLIES_TO]-> maximum out-of-pocket expenses
+inpatient services -[HAS_COINSURANCE]-> 40%
+rehabilitation services -[HAS_COINSURANCE]-> 20%
+skilled nursing care -[HAS_LIMIT]-> 60 visits/calendar year
+childbirth/delivery professional services -[HAS_COINSURANCE]-> 20%
+home health care -[HAS_COINSURANCE]-> 20%
+non-emergency care outside the u.s. -[TYPE]-> other_covered_service
+primary care visit -[OUT_OF_NETWORK_COST]-> 40% coinsurance
+routine foot care -[TYPE]-> other_covered_service
+specialist visit -[OUT_OF_NETWORK_COST]-> 40% coinsurance
+copay -[AMOUNT]-> $35
+long term care -[TYPE]-> other_covered_service
+specialist visit -[NETWORK_COST]-> $50 copay
+weight loss programs -[TYPE]-> other_covered_service
+coinsurance -[EMERGENCY_ROOM_CARE]-> 40%
+limit -[HOME_HEALTH_CARE]-> 60 visits/year
+acupuncture -[TYPE]-> other_covered_service
+out-of-pocket limit -[OUT_OF_NETWORK_FAMILY]-> $8,000
+chiropractic care -[TYPE]-> other_covered_service
+out-of-pocket limit -[FAMILY]-> $5,000
+out-of-pocket limit -[OUT_OF_NETWORK_INDIVIDUAL]-> $4,000
+deductible -[AMOUNT]-> 
+network -[COST]-> 20% coinsurance
+deductible -[FAMILY]-> $1,000
+infertility treatment -[TYPE]-> other_covered_service
+private duty nursing -[TYPE]-> other_covered_service
+out-of-network -[COST]-> 40% coinsurance
+occupational therapy services -[DEDUCTIBLE]-> $300
+deductible -[INDIVIDUAL]-> $500
+coinsurance -[PERCENTAGE]-> 20%
+dental care -[TYPE]-> other_covered_service
+preauthorization -[REQUIRED]-> True
+prescription drug coverage -[DEDUCTIBLE]-> $300
+out-of-pocket limit -[INDIVIDUAL]-> $2,500
+primary care visit -[NETWORK_COST]-> $35 copay
+routine eye care (adult) -[TYPE]-> other_covered_service
+preauthorization -[REDUCTION]-> 50%
+copay -[PRIMARY_CARE_VISIT]-> $35
