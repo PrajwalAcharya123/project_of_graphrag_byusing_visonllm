@@ -290,13 +290,354 @@
 #     coalesce(e.answer, e.value, e.network_cost, v.name) AS result
 # ORDER BY relationship
 # """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from openai import OpenAI
+# import os
+# import re
+# import requests
+# from dotenv import load_dotenv
+
+# load_dotenv()
+# # Pricing (example for llama-4-maverick)
+# INPUT_PRICE_PER_MILLION = 0.15
+# OUTPUT_PRICE_PER_MILLION = 0.60
+
+# # Context window
+# MODEL_CONTEXT_LIMIT = 128000
+
+# OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+# OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# if not OPENROUTER_API_KEY:
+#     raise ValueError("OPENROUTER_API_KEY not found in .env file!")
+
+
+# def question_to_cypher(question):
+#     """
+#     Final unified Cypher generator for SBC Neo4j graph.
+#     Covers all major question types.
+#     """
+
+#     prompt = f"""
+# You are an expert Neo4j Cypher query generator for health insurance SBC documents.
+
+# -------------------------------
+# GRAPH SCHEMA
+# -------------------------------
+# - Nodes: (:Entity)
+# - Properties:
+#     name (main identifier)
+#     value (for copay/coinsurance)
+#     raw (full cost string)
+#     text (limitations)
+# ----------------------------------
+# GRAPH RELATIONSHIPS
+# ----------------------------------
+# Service → HAS_NETWORK_COST → costNode
+# Service → HAS_OUT_OF_NETWORK_COST → costNode
+
+# costNode → HAS_COPAY → detailNode
+# costNode → HAS_COINSURANCE → detailNode
+
+# Service → HAS_LIMITATION → limitationNode
+# Service → REQUIRES → Preauthorization
+
+
+# -------------------------------
+# STRICT RULES (MUST FOLLOW)
+# -------------------------------
+# 1. Output ONLY Cypher (no explanation).
+# 2. ALWAYS use case-insensitive search:
+#    toLower(s.name) CONTAINS toLower("<keyword>")
+# 3. ALWAYS traverse BOTH:
+#    HAS_NETWORK_COST and HAS_OUT_OF_NETWORK_COST
+# 4. VALUE is a REQUIRED final hop:
+#    detailNode NEVER contains the actual value.
+#    You MUST ALWAYS use:
+
+#    OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)
+
+#    and return valNode.value
+# 5. Use properties:
+#    - detailNode.value
+#    - costNode.raw
+#    - rawNode.value
+#    - limitationNode.text
+# 6. Prefer OPTIONAL MATCH
+# 7. Always return:
+#    entity, relationship, result
+# 8. Use exact EXAMPLES template, if question matches 
+
+# -------------------------------
+# SMART QUERY PATTERN
+# -------------------------------
+# MATCH (s:Entity)
+# WHERE toLower(s.name) CONTAINS toLower("<keyword>")
+
+# OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
+# OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
+# OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)
+
+# RETURN 
+#     s.name AS entity,
+#     type(r1) AS cost_type,
+#     type(r2) AS detail_type,
+#     detailNode.value,
+#     costNode.name,
+#     valNode.value
+# ORDER BY entity, cost_type, detail_type
+
+# -------------------------------
+# SPECIALIZED PATTERNS
+# -------------------------------
+
+# # Important Questions
+# MATCH (e:Entity)-[r:ANSWER]->(v:Value)
+# WHERE toLower(e.name) CONTAINS toLower($k)
+
+# RETURN 
+#     e.name AS entity,
+#     "ANSWER" AS relationship,
+#     v.value AS answer
+
+# # Overall Deductible / General Fallback
+# MATCH (e:Entity)
+# WHERE toLower(e.name) CONTAINS toLower(k)
+
+# OPTIONAL MATCH (e)-[r]-(v)
+
+# RETURN 
+#     e.name AS entity,
+#     type(r) AS relationship,
+#     coalesce(
+#         e.answer,
+#         e.value,
+#         e.network_cost,
+#         e.out_of_network_cost,
+#         v.value,
+#         v.name
+#     ) AS result
+# ORDER BY relationship
+
+# #Copay and Coinsurance
+# MATCH (s:Entity)
+# WHERE toLower(s.name) CONTAINS toLower(k)
+
+# OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
+# OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
+# OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)   
+
+# RETURN 
+#     s.name AS entity,
+#     type(r1) AS cost_type,
+#     type(r2) AS detail_type,
+#     coalesce(
+#         valNode.value,       
+#         detailNode.name,
+#         costNode.name
+#     ) AS result
+# ORDER BY entity, cost_type, detail_type
+
+# # Covered Services
+# MATCH (p:Entity)-[:COVERS_SERVICE]->(s:Entity)
+# WHERE toLower(p.name) CONTAINS toLower(k)
+# RETURN 
+#     p.name AS plan,
+#     s.name AS covered_service
+# ORDER BY covered_service
+
+# # Service + Cost
+# MATCH (s:Entity)
+# WHERE any(k IN $keywords WHERE toLower(s.name) CONTAINS toLower(k))
+
+# OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
+# OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
+# OPTIONAL MATCH (s)-[r3:HAS_LIMITATION]->(limNode)
+# OPTIONAL MATCH (s)-[r4:REQUIRES]->(req)
+
+# RETURN 
+#     s.name AS entity,
+#     coalesce(type(r2), type(r1), type(r3), type(r4)) AS relationship,
+#     coalesce(
+#         detailNode.value,
+#         costNode.raw,
+#         limNode.text,
+#         req.name
+#     ) AS result
+# ORDER BY entity, relationship
+
+# # Network / Out-of-network Cost
+# MATCH (s:Entity)
+# WHERE toLower(s.name) CONTAINS toLower(k)
+
+# OPTIONAL MATCH (s)-[:RAW]->(rawNode)
+
+# OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
+# OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
+# OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)
+
+# RETURN 
+#     s.name AS entity,
+#     type(r1) AS cost_type,
+#     type(r2) AS detail_type,
+#     coalesce(
+#         rawNode.value,
+#         valNode.value,
+#         detailNode.name,
+#         costNode.raw
+#     ) AS result
+# ORDER BY entity
+
+# # Limitations 
+# MATCH (s:Entity)
+# WHERE toLower(s.name) CONTAINS toLower($k)
+
+# OPTIONAL MATCH (s)-[:HAS_LIMITATION]->(lim)
+
+# OPTIONAL MATCH (lim)-[:TEXT]->(v:Value)
+
+# RETURN 
+#     s.name AS entity,
+#     "HAS_LIMITATION" AS relationship,
+#     coalesce(v.value, lim.text, lim.name) AS result
+# ORDER BY entity
+
+# # Not Covered / Exclusions 
+# MATCH (p:Entity)-[:EXCLUDES_SERVICE]->(s:Entity)
+# RETURN 
+#     p.name AS healthplan,
+#     s.name AS covered_service
+
+# # Preauthorization / Requirements
+# MATCH (s:Entity)
+# WHERE any(k IN $keywords WHERE toLower(s.name) CONTAINS toLower(k))
+
+# OPTIONAL MATCH (s)-[:REQUIRES]->(req)
+
+# RETURN 
+#     s.name AS entity,
+#     "REQUIRES" AS relationship,
+#     req.name AS result
+# ORDER BY entity
+
+# -------------------------------
+
+# #EXAMPLES
+
+# Q: Are there services covered before you meet your deductible?
+# A:
+# MATCH (e:Entity)-[:ANSWER]->(v:Value)
+# WHERE toLower(e.name) CONTAINS toLower("services covered before you meet your deductible")
+#    OR toLower(e.name) CONTAINS toLower("covered before deductible")
+
+# RETURN 
+#     e.name AS entity,
+#     "ANSWER" AS relationship,
+#     v.value AS answer
+
+# Q: Are there other deductibles for specific services?
+# A:
+# MATCH (e:Entity)-[r:ANSWER]->(v:Value)
+# WHERE toLower(e.name) CONTAINS toLower("other deductibles")
+#    OR toLower(e.name) CONTAINS toLower("specific services")
+
+# RETURN 
+#     e.name AS entity,
+#     "ANSWER" AS relationship,
+#     v.value AS answer
+
+# Q: What is the out-of-pocket limit for this plan?
+# A:
+# MATCH (e:Entity)-[r:ANSWER]->(v:Value)
+# WHERE toLower(e.name) CONTAINS toLower("out-of-pocket limit for this plan")
+
+# RETURN 
+#     e.name AS entity,
+#     "ANSWER" AS relationship,
+#     v.value AS answer
+
+# Q: What are the other covered services?
+# A:
+# MATCH (p:Entity)-[:COVERS_SERVICE]->(s:Entity)
+# RETURN 
+#     p.name AS healthplan,
+#     s.name AS covered_service
+
+# Q: What is not included in the out-of-pocket limit?
+# A:
+# MATCH (e:Entity)-[r:ANSWER]->(v:Value)
+# WHERE toLower(e.name) CONTAINS toLower("not included in the out-of-pocket limit")
+
+# RETURN 
+#     e.name AS entity,
+#     "ANSWER" AS relationship,
+#     v.value AS answer
+
+# Q: Do you need a referral to see a specialist?
+# A:
+# MATCH (e:Entity)-[r:ANSWER]->(v:Value)
+# WHERE toLower(e.name) CONTAINS toLower("referral to see a specialist")
+
+# RETURN 
+#     e.name AS entity,
+#     "ANSWER" AS relationship,
+#     v.value AS answer
+
+# -------------------------
+# QUESTION:
+# {question}
+
+# First extract important keywords from the question, then generate the BEST Cypher query.
+# """
+
+#     headers = {
+#         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+#         "HTTP-Referer": "http://localhost",
+#         "X-Title": "SBC Cypher Generator",
+#         "Content-Type": "application/json"
+#     }
+
+#     payload = {
+#         "model": "meta-llama/llama-4-maverick",
+#         "messages": [{"role": "user", "content": prompt}],
+#         "temperature": 0.0,
+
+#         "max_tokens": 800
+#     }
 from openai import OpenAI
 import os
+from sympy import re
+
+
 import re
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
+# Pricing (example for llama-4-maverick)
+INPUT_PRICE_PER_MILLION =0.25
+OUTPUT_PRICE_PER_MILLION =0.75
+
+# Context window
+MODEL_CONTEXT_LIMIT = 128000
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -304,96 +645,145 @@ OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 if not OPENROUTER_API_KEY:
     raise ValueError("OPENROUTER_API_KEY not found in .env file!")
 
+def clean_cypher(cypher: str) -> str:
+    cypher = cypher.strip()
+
+    # remove markdown fences
+    cypher = re.sub(r"```(?:cypher)?", "", cypher)
+    cypher = cypher.replace("```", "")
+
+    # remove anything before MATCH/CALL (very important for your bug)
+    match = re.search(r"(MATCH|CALL|WITH|UNWIND).*", cypher, re.DOTALL)
+    if match:
+        cypher = match.group(0)
+
+    return cypher.strip()
 
 def question_to_cypher(question):
     """
-    Final unified Cypher generator for SBC Neo4j graph.
-    Covers all major question types.
+    Deterministic Cypher generator aligned with ACTUAL Neo4j structure
     """
 
     prompt = f"""
-You are an expert Neo4j Cypher query generator for health insurance SBC documents.
+You are a STRICT Neo4j Cypher generator.
 
--------------------------------
-GRAPH SCHEMA
--------------------------------
-- Nodes: (:Entity)
-- Properties:
-    name (main identifier)
-    value (for copay/coinsurance)
-    raw (full cost string)
-    text (limitations)
+You MUST follow templates EXACTLY.
+DO NOT invent variables.
+DO NOT modify query structure.
+
 ----------------------------------
-GRAPH RELATIONSHIPS
+REAL GRAPH STRUCTURE (IMPORTANT)
 ----------------------------------
-Service → HAS_NETWORK_COST → costNode
-Service → HAS_OUT_OF_NETWORK_COST → costNode
 
-costNode → HAS_COPAY → detailNode
-costNode → HAS_COINSURANCE → detailNode
+(:Entity {{name: "Service"}})
 
-Service → HAS_LIMITATION → limitationNode
+(:Entity)-[:INCLUDES_SERVICE]->(:Entity)
+
+Service → HAS_NETWORK_COST → NetworkNode
+Service → HAS_OUT_OF_NETWORK_COST → OONNode
+
+NetworkNode → HAS_COPAY → CopayNode
+NetworkNode → HAS_COINSURANCE → CoinsNode
+
+NetworkNode → VALUE → ValueNode
+CopayNode → VALUE → ValueNode
+CoinsNode → VALUE → ValueNode
+
+Service → HAS_LIMITATION → LimitationNode
+LimitationNode → TEXT → ValueNode
+
 Service → REQUIRES → Preauthorization
 
+----------------------------------
+CRITICAL RULES (DO NOT BREAK)
+----------------------------------
 
--------------------------------
-STRICT RULES (MUST FOLLOW)
--------------------------------
-1. Output ONLY Cypher (no explanation).
-2. ALWAYS use case-insensitive search:
+1. Return ONLY valid Cypher.
+
+2. ALWAYS use:
    toLower(s.name) CONTAINS toLower("<keyword>")
-3. ALWAYS traverse BOTH:
-   HAS_NETWORK_COST and HAS_OUT_OF_NETWORK_COST
-4. VALUE is a REQUIRED final hop:
-   detailNode NEVER contains the actual value.
-   You MUST ALWAYS use:
 
-   OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)
+3. NEVER invent variable names: net_detail_val, oon_detail_val, anything new
 
-   and return valNode.value
-5. Use properties:
-   - detailNode.value
-   - costNode.raw
-   - rawNode.value
-   - limitationNode.text
-6. Prefer OPTIONAL MATCH
-7. Always return:
+4. ONLY use these variables:
+   s, net, oon, detail, val
+
+5. VALUE can come from TWO places:
+   - (net)-[:VALUE]->(val)
+   - (detail)-[:VALUE]->(val)
+
+6. ALWAYS return EXACTLY:
    entity, relationship, result
-8. Use exact EXAMPLES template, if question matches 
 
--------------------------------
-SMART QUERY PATTERN
--------------------------------
+7. NO explanations. ONLY Cypher.
+8. USE the specialized patterns for related questions
+9. If the question mentions Peg, Joe or Mia, THEN ALWAYS USE the specialized COVERAGE EXAMPLE Cypher pattern.
+
+---------------------------------
+SMART QUERY PATTERNS
+---------------------------------
+MATCH (s:Entity)-[:QUESTION]->(q:Value)
+WHERE toLower(q.value) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (s)-[:INCLUDES_SERVICE]->(svc)
+WITH s, q, COALESCE(svc, s) AS target
+
+OPTIONAL MATCH (target)-[:VALUE]->(v:Value)
+
+OPTIONAL MATCH (target)-[:HAS_NETWORK_COST]->(net)
+OPTIONAL MATCH (net)-[:VALUE]->(net_val)
+OPTIONAL MATCH (net)-[:HAS_COPAY|HAS_COINSURANCE]->(net_detail)
+
+OPTIONAL MATCH (target)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
+OPTIONAL MATCH (oon)-[:VALUE]->(oon_val)
+OPTIONAL MATCH (oon)-[:HAS_COPAY|HAS_COINSURANCE]->(oon_detail)
+
+RETURN 
+    s.name AS matched_entity,
+    target.name AS service,
+    "QUESTION_MATCH" AS relationship,
+
+    v.value AS result,
+
+    net_val.name AS network_cost,
+    net_detail.name AS network_details,
+
+    oon_val.name AS out_of_network_cost,
+    oon_detail.name AS out_of_network_details
+
+----------------------------------
+SPECIALIZED PATTERNS
+----------------------------------
+
+### 1. COPAY/COINSURANCE QUESTIONS
 MATCH (s:Entity)
 WHERE toLower(s.name) CONTAINS toLower("<keyword>")
 
-OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
-OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
-OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)
+OPTIONAL MATCH (s)-[:INCLUDES_SERVICE]->(svc)
+
+WITH s, COALESCE(svc, s) AS target
+
+OPTIONAL MATCH (target)-[:HAS_NETWORK_COST]->(net)
+OPTIONAL MATCH (net)-[:VALUE]->(net_val)
+OPTIONAL MATCH (net)-[:HAS_COPAY|HAS_COINSURANCE]->(net_detail)
+
+OPTIONAL MATCH (target)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
+OPTIONAL MATCH (oon)-[:VALUE]->(oon_val)
+OPTIONAL MATCH (oon)-[:HAS_COPAY|HAS_COINSURANCE]->(oon_detail)
 
 RETURN 
-    s.name AS entity,
-    type(r1) AS cost_type,
-    type(r2) AS detail_type,
-    detailNode.value,
-    costNode.name,
-    valNode.value
-ORDER BY entity, cost_type, detail_type
+    s.name AS matched_entity,
+    target.name AS service,
+    
+    net_val.name AS network_cost,
+    net_detail.name AS network_details,
 
--------------------------------
-SPECIALIZED PATTERNS
--------------------------------
+    oon_val.name AS out_of_network_cost,
+    oon_detail.name AS out_of_network_details
 
-# Important Questions
-MATCH (e:Entity)-[r:ANSWER]->(v:Value)
-WHERE toLower(e.name) CONTAINS toLower($k)
+----------------------------------
 
-RETURN 
-    e.name AS entity,
-    "ANSWER" AS relationship,
-    v.value AS answer
-
-# Overall Deductible / General Fallback
+### 2. DEDUCTIBLE
 MATCH (e:Entity)
 WHERE toLower(e.name) CONTAINS toLower(k)
 
@@ -411,99 +801,48 @@ RETURN
         v.name
     ) AS result
 ORDER BY relationship
-
-#Copay and Coinsurance
+------------------------------------------
+### 3. OUT OF POCKET LIMIT
 MATCH (s:Entity)
-WHERE toLower(s.name) CONTAINS toLower(k)
+WHERE s.name = toLower(k)
 
-OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
-OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
-OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)   
+OPTIONAL MATCH (s)-[:VALUE]->(v:Value)
 
 RETURN 
     s.name AS entity,
-    type(r1) AS cost_type,
-    type(r2) AS detail_type,
-    coalesce(
-        valNode.value,       
-        detailNode.name,
-        costNode.name
-    ) AS result
-ORDER BY entity, cost_type, detail_type
+    "VALUE" AS relationship,
+    v.value AS result
+------------------------------------------------
+### 4. Out-of-pocket exclusion
+MATCH (e:Entity)
+WHERE toLower(e.name) = "out-of-pocket exclusions"
 
-# Covered Services
-MATCH (p:Entity)-[:COVERS_SERVICE]->(s:Entity)
-WHERE toLower(p.name) CONTAINS toLower(k)
-RETURN 
-    p.name AS plan,
-    s.name AS covered_service
-ORDER BY covered_service
-
-# Service + Cost
-MATCH (s:Entity)
-WHERE any(k IN $keywords WHERE toLower(s.name) CONTAINS toLower(k))
-
-OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
-OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
-OPTIONAL MATCH (s)-[r3:HAS_LIMITATION]->(limNode)
-OPTIONAL MATCH (s)-[r4:REQUIRES]->(req)
+OPTIONAL MATCH (e)-[:VALUE]->(v:Value)
 
 RETURN 
-    s.name AS entity,
-    coalesce(type(r2), type(r1), type(r3), type(r4)) AS relationship,
-    coalesce(
-        detailNode.value,
-        costNode.raw,
-        limNode.text,
-        req.name
-    ) AS result
-ORDER BY entity, relationship
+    e.name AS entity,
+    v.value AS out_of_pocket_exclusion
+-------------------------------------------------
+### 5. LIMITATIONS
 
-# Network / Out-of-network Cost
 MATCH (s:Entity)
-WHERE toLower(s.name) CONTAINS toLower(k)
-
-OPTIONAL MATCH (s)-[:RAW]->(rawNode)
-
-OPTIONAL MATCH (s)-[r1:HAS_NETWORK_COST|HAS_OUT_OF_NETWORK_COST]->(costNode)
-OPTIONAL MATCH (costNode)-[r2:HAS_COPAY|HAS_COINSURANCE]->(detailNode)
-OPTIONAL MATCH (detailNode)-[:VALUE]->(valNode)
-
-RETURN 
-    s.name AS entity,
-    type(r1) AS cost_type,
-    type(r2) AS detail_type,
-    coalesce(
-        rawNode.value,
-        valNode.value,
-        detailNode.name,
-        costNode.raw
-    ) AS result
-ORDER BY entity
-
-# Limitations 
-MATCH (s:Entity)
-WHERE toLower(s.name) CONTAINS toLower($k)
+WHERE toLower(s.name) CONTAINS toLower("<keyword>")
 
 OPTIONAL MATCH (s)-[:HAS_LIMITATION]->(lim)
-
-OPTIONAL MATCH (lim)-[:TEXT]->(v:Value)
+OPTIONAL MATCH (lim)-[:TEXT]->(val)
 
 RETURN 
     s.name AS entity,
     "HAS_LIMITATION" AS relationship,
-    coalesce(v.value, lim.text, lim.name) AS result
+    val.name AS result
 ORDER BY entity
 
-# Not Covered / Exclusions 
-MATCH (p:Entity)-[:EXCLUDES_SERVICE]->(s:Entity)
-RETURN 
-    p.name AS healthplan,
-    s.name AS covered_service
+----------------------------------
 
-# Preauthorization / Requirements
+### 6. PREAUTHORIZATION
+
 MATCH (s:Entity)
-WHERE any(k IN $keywords WHERE toLower(s.name) CONTAINS toLower(k))
+WHERE toLower(s.name) CONTAINS toLower("<keyword>")
 
 OPTIONAL MATCH (s)-[:REQUIRES]->(req)
 
@@ -513,41 +852,181 @@ RETURN
     req.name AS result
 ORDER BY entity
 
--------------------------------
+----------------------------------
 
-#EXAMPLES
+### 7. NOT COVERED / EXCLUSIONS
 
-Q: Are there services covered before you meet your deductible?
+MATCH (h:Entity)-[:EXCLUDES_SERVICE]->(s:Entity)
+
+RETURN 
+    h.name AS entity,
+    "EXCLUDES_SERVICE" AS relationship,
+    s.name AS result
+ORDER BY s.name
+
+-----------------------------------
+
+### 8. OTHER COVERED SERVICES
+MATCH (p:Entity)-[:COVERS_SERVICE]->(s:Entity)
+RETURN 
+    p.name AS healthplan,
+    s.name AS covered_service
+
+--------------------------------------
+
+### 9. RIGHTS
+MATCH (p:Entity)
+      -[r]->
+      (g:Entity)
+WHERE toLower(g.name) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (g)-[:SUMMARY]->(s:Value)
+
+RETURN
+    p.name AS plan,
+    type(r) AS relationship,
+    g.name AS section,
+    s.value AS summary
+ORDER BY s.value IS NULL
+--------------------------------------------
+
+### 12. MINIMUM ESSENTIAL COVERAGE / MINIMUM VALUE STANDARDS
+MATCH (p:Entity)
+      -[r]->
+      (g:Entity)
+WHERE toLower(g.name) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (g)-[:SUMMARY]->(s:Value)
+
+RETURN
+    p.name AS plan,
+    type(r) AS relationship,
+    g.name AS section,
+    s.value AS summary
+ORDER BY s.value IS NULL
+------------------------------------------------
+
+### 11. IMPORTANT QUESTIONS
+MATCH (s:Entity)-[:QUESTION]->(q:Value)
+WHERE toLower(q.value) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (s)-[:VALUE]->(v:Value)
+
+OPTIONAL MATCH (s)-[:HAS_NETWORK_COST]->(net)
+OPTIONAL MATCH (net)-[:VALUE]->(net_val)
+OPTIONAL MATCH (net)-[:HAS_COPAY|HAS_COINSURANCE]->(net_detail)
+
+OPTIONAL MATCH (s)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
+OPTIONAL MATCH (oon)-[:VALUE]->(oon_val)
+OPTIONAL MATCH (oon)-[:HAS_COPAY|HAS_COINSURANCE]->(oon_detail)
+
+RETURN 
+    s.name AS entity,
+    "QUESTION_MATCH" AS relationship,
+    v.value AS result,
+    net_val.name AS network_cost,
+    net_detail.name AS network_details,
+    oon_val.name AS out_of_network_cost,
+    oon_detail.name AS out_of_network_details
+
+--------------------------------------------------
+
+### 12. COVERAGE EXAMPLES for Questions mentioning Peg, Joe or Mia.
+
+MATCH (root:Entity)
+      -[:HAS_SCENARIO]->(scenario:Entity)
+WHERE root.name = "Coverage Example Scenarios"
+
+
+WHERE
+    toLower(scenario.name) CONTAINS toLower($scenario)
+    OR toLower(scenario.display_name) CONTAINS toLower($scenario)
+
+OPTIONAL MATCH (scenario)-[r]->(node:Entity)
+
+WHERE
+    $relationship IS NULL
+    OR type(r) = $relationship
+
+RETURN
+    scenario.name AS scenario,
+    type(r) AS relationship,
+    node.name AS node,
+    node.description AS description,
+    node.amount AS amount
+
+### 13. GENERAL FALLBACK
+
+MATCH (s:Entity)
+WHERE toLower(s.name) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (s)-[r]->(n)
+
+RETURN 
+    s.name AS entity,
+    type(r) AS relationship,
+    n.name AS result
+ORDER BY entity
+
+----------------------------------
+
+
+### EXAMPLES
+
+Q: What is the overall deductible?
 A:
-MATCH (e:Entity)-[:ANSWER]->(v:Value)
-WHERE toLower(e.name) CONTAINS toLower("services covered before you meet your deductible")
-   OR toLower(e.name) CONTAINS toLower("covered before deductible")
+MATCH (e:Entity)
+WHERE e.name = "Overall Deductible"
+
+OPTIONAL MATCH (e)-[r:VALUE]->(v)
 
 RETURN 
     e.name AS entity,
-    "ANSWER" AS relationship,
-    v.value AS answer
+    type(r) AS relationship,
+    v.result AS value,
 
-Q: Are there other deductibles for specific services?
+
+Q: What is not included in the out-of-pocket limit?
 A:
-MATCH (e:Entity)-[r:ANSWER]->(v:Value)
-WHERE toLower(e.name) CONTAINS toLower("other deductibles")
-   OR toLower(e.name) CONTAINS toLower("specific services")
+MATCH (s:Entity)
+WHERE s.name = "Out-of-Pocket Exclusions"
+
+OPTIONAL MATCH (s)-[:VALUE]->(v:Value)
 
 RETURN 
-    e.name AS entity,
-    "ANSWER" AS relationship,
-    v.value AS answer
+    s.name AS entity,
+    "VALUE" AS relationship,
+    v.value AS result
 
-Q: What is the out-of-pocket limit for this plan?
+
+Q: Will you pay less if you use a network provider?
 A:
-MATCH (e:Entity)-[r:ANSWER]->(v:Value)
-WHERE toLower(e.name) CONTAINS toLower("out-of-pocket limit for this plan")
+MATCH (s:Entity)-[:QUESTION]->(q:Value)
+WHERE toLower(q.value) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (s)-[:VALUE]->(v:Value)
+
 
 RETURN 
-    e.name AS entity,
-    "ANSWER" AS relationship,
-    v.value AS answer
+    s.name AS entity,
+    "QUESTION_MATCH" AS relationship,
+    v.value AS result
+
+Q: Does this plan provide minimum essential coverage?
+A:
+MATCH (p:Entity)
+      -[r]->
+      (g:Entity)
+WHERE toLower(g.name) CONTAINS toLower("<keyword>")
+
+OPTIONAL MATCH (g)-[:SUMMARY]->(s:Value)
+
+RETURN
+    p.name AS plan,
+    type(r) AS relationship,
+    g.name AS section,
+    s.value AS summary
+ORDER BY s.value IS NULL
 
 Q: What are the other covered services?
 A:
@@ -555,32 +1034,13 @@ MATCH (p:Entity)-[:COVERS_SERVICE]->(s:Entity)
 RETURN 
     p.name AS healthplan,
     s.name AS covered_service
+------------------------------------
 
-Q: What is not included in the out-of-pocket limit?
-A:
-MATCH (e:Entity)-[r:ANSWER]->(v:Value)
-WHERE toLower(e.name) CONTAINS toLower("not included in the out-of-pocket limit")
-
-RETURN 
-    e.name AS entity,
-    "ANSWER" AS relationship,
-    v.value AS answer
-
-Q: Do you need a referral to see a specialist?
-A:
-MATCH (e:Entity)-[r:ANSWER]->(v:Value)
-WHERE toLower(e.name) CONTAINS toLower("referral to see a specialist")
-
-RETURN 
-    e.name AS entity,
-    "ANSWER" AS relationship,
-    v.value AS answer
-
--------------------------
 QUESTION:
 {question}
 
-First extract important keywords from the question, then generate the BEST Cypher query.
+OUTPUT:
+ONLY Cypher query.
 """
 
     headers = {
@@ -591,10 +1051,12 @@ First extract important keywords from the question, then generate the BEST Cyphe
     }
 
     payload = {
-        "model": "meta-llama/llama-4-maverick",
+        #"model": "meta-llama/llama-4-maverick",
+        "model": "qwen/qwen2.5-vl-72b-instruct", 
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.0,
-        "max_tokens": 800
+        "top_p": 0.1,
+        "max_tokens": 500
     }
 
     try:
@@ -609,14 +1071,64 @@ First extract important keywords from the question, then generate the BEST Cyphe
             print(f"OpenRouter Error {response.status_code}: {response.text}")
             raise Exception(f"Status {response.status_code}")
 
+        # result = response.json()
+        # cypher = result['choices'][0]['message']['content'].strip()
         result = response.json()
-        cypher = result['choices'][0]['message']['content'].strip()
 
+        # =========================
+        # TOKEN USAGE
+        # =========================
+        usage = result.get("usage", {})
+
+        prompt_tokens = usage.get("prompt_tokens", 0)
+        completion_tokens = usage.get("completion_tokens", 0)
+        total_tokens = usage.get("total_tokens", 0)
+
+        # =========================
+        # COST CALCULATION
+        # =========================
+        input_cost = (
+            prompt_tokens / 1_000_000
+        ) * INPUT_PRICE_PER_MILLION
+
+        output_cost = (
+            completion_tokens / 1_000_000
+        ) * OUTPUT_PRICE_PER_MILLION
+
+        total_cost = input_cost + output_cost
+
+        # =========================
+        # REMAINING TOKENS
+        # =========================
+        remaining_tokens = MODEL_CONTEXT_LIMIT - total_tokens
+
+        # =========================
+        # PRINT STATS
+        # =========================
+        print("\n========== CYPHER GENERATOR USAGE ==========")
+        print(f"Prompt Tokens      : {prompt_tokens}")
+        print(f"Completion Tokens  : {completion_tokens}")
+        print(f"Total Tokens       : {total_tokens}")
+        print(f"Remaining Tokens   : {remaining_tokens}")
+
+        print("\n========== CYPHER GENERATOR COST ==========")
+        print(f"Input Cost         : ${input_cost:.6f}")
+        print(f"Output Cost        : ${output_cost:.6f}")
+        print(f"Total Cost         : ${total_cost:.6f}")
+
+        cypher = result['choices'][0]['message']['content'].strip()
         # Clean code blocks
         cypher = re.sub(r"```(?:cypher)?\s*", "", cypher)
         cypher = re.sub(r"```\s*$", "", cypher)
 
-        return cypher.strip()
+        # return cypher.strip()
+        return {
+    "cypher": cypher.strip(),
+    "prompt_tokens": prompt_tokens,
+    "completion_tokens": completion_tokens,
+    "total_tokens": total_tokens,
+    "total_cost": total_cost
+}
 
     except Exception as e:
         print(f" Cypher generation failed: {e}")

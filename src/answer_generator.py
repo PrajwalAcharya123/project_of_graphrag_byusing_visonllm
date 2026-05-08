@@ -1,11 +1,18 @@
 # src/answer_generator.py
 import os
+from unittest import result
 import requests
 import re
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
+# Pricing (example for llama-4-maverick)
+INPUT_PRICE_PER_MILLION = 0.25
+OUTPUT_PRICE_PER_MILLION = 0.75
+
+# Context window
+MODEL_CONTEXT_LIMIT = 128000
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -85,7 +92,8 @@ Database Results:
     }
 
     payload = {
-        "model": "meta-llama/llama-4-maverick",
+        #"model": "meta-llama/llama-4-maverick",
+        "model": "qwen/qwen2.5-vl-72b-instruct",
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_message}
@@ -101,9 +109,59 @@ Database Results:
             return "Rate limit reached. Please try again in a moment."
         
         response.raise_for_status()
+        # result = response.json()
+        # return result['choices'][0]['message']['content'].strip()
         result = response.json()
-        return result['choices'][0]['message']['content'].strip()
 
+        # =========================
+        # TOKEN USAGE
+        # =========================
+        usage = result.get("usage", {})
+
+        prompt_tokens = usage.get("prompt_tokens", 0)
+        completion_tokens = usage.get("completion_tokens", 0)
+        total_tokens = usage.get("total_tokens", 0)
+
+        # =========================
+        # COST CALCULATION
+        # =========================
+        input_cost = (
+            prompt_tokens / 1_000_000
+        ) * INPUT_PRICE_PER_MILLION
+
+        output_cost = (
+            completion_tokens / 1_000_000
+        ) * OUTPUT_PRICE_PER_MILLION
+
+        total_cost = input_cost + output_cost
+
+        # =========================
+        # REMAINING TOKENS
+        # =========================
+        remaining_tokens = MODEL_CONTEXT_LIMIT - total_tokens
+
+        # =========================
+        # PRINT STATS
+        # =========================
+        print("\n========== ANSWER GENERATOR USAGE ==========")
+        print(f"Prompt Tokens      : {prompt_tokens}")
+        print(f"Completion Tokens  : {completion_tokens}")
+        print(f"Total Tokens       : {total_tokens}")
+        print(f"Remaining Tokens   : {remaining_tokens}")
+
+        print("\n========== ANSWER GENERATOR COST ==========")
+        print(f"Input Cost         : ${input_cost:.6f}")
+        print(f"Output Cost        : ${output_cost:.6f}")
+        print(f"Total Cost         : ${total_cost:.6f}")
+
+        # return result['choices'][0]['message']['content'].strip()
+        return {
+    "answer": result['choices'][0]['message']['content'].strip(),
+    "prompt_tokens": prompt_tokens,
+    "completion_tokens": completion_tokens,
+    "total_tokens": total_tokens,
+    "total_cost": total_cost
+}
     except Exception as e:
         print(f"Answer generation failed: {e}")
         # Fallback: Try to extract answer manually from DB result

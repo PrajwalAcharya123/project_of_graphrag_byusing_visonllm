@@ -99,7 +99,7 @@ def main():
 
     #  STEP 2: Chunk combined HTML
     print("Chunking HTML...")
-    # chunk_html(COMBINED_HTML, chunk_path)
+    #chunk_html(COMBINED_HTML, chunk_path)
 
     #  STEP 3: Process graph
     print(" Extracting Graph + Storing in Neo4j...")
