@@ -622,6 +622,30 @@
 
 #         "max_tokens": 800
 #     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from openai import OpenAI
 import os
 from sympy import re
@@ -664,6 +688,7 @@ def question_to_cypher(question):
     Deterministic Cypher generator aligned with ACTUAL Neo4j structure
     """
 
+  
     prompt = f"""
 You are a STRICT Neo4j Cypher generator.
 
@@ -682,12 +707,17 @@ REAL GRAPH STRUCTURE (IMPORTANT)
 Service → HAS_NETWORK_COST → NetworkNode
 Service → HAS_OUT_OF_NETWORK_COST → OONNode
 
-NetworkNode → HAS_COPAY → CopayNode
-NetworkNode → HAS_COINSURANCE → CoinsNode
-
 NetworkNode → VALUE → ValueNode
-CopayNode → VALUE → ValueNode
-CoinsNode → VALUE → ValueNode
+OONNode → VALUE → ValueNode
+
+NetworkNode → HAS_COPAY → CopayNode
+NetworkNode → HAS_COINSURANCE → CoinsuranceNode
+
+OONNode → HAS_COPAY → CopayNode
+OONNode → HAS_COINSURANCE → CoinsuranceNode
+
+CopayNode → COPAY_VALUE → ValueNode
+CoinsuranceNode → COINSURANCE_VALUE → ValueNode
 
 Service → HAS_LIMITATION → LimitationNode
 LimitationNode → TEXT → ValueNode
@@ -707,17 +737,19 @@ CRITICAL RULES (DO NOT BREAK)
 
 4. ONLY use these variables:
    s, net, oon, detail, val
-
-5. VALUE can come from TWO places:
+5. VALUE can come from multiple places:
    - (net)-[:VALUE]->(val)
    - (detail)-[:VALUE]->(val)
+   - (copay)-[:COPAY_VALUE]->(val)
+   - (coinsurance)-[:COINSURANCE_VALUE]->(val)
 
 6. ALWAYS return EXACTLY:
    entity, relationship, result
 
 7. NO explanations. ONLY Cypher.
-8. USE the specialized patterns for related questions
+8. USE the specialized patterns for related questions.
 9. If the question mentions Peg, Joe or Mia, THEN ALWAYS USE the specialized COVERAGE EXAMPLE Cypher pattern.
+10. If the question matches the ones from EXAMPLES, USE THE SAME PATTERN.
 
 ---------------------------------
 SMART QUERY PATTERNS
@@ -731,25 +763,37 @@ WITH s, q, COALESCE(svc, s) AS target
 OPTIONAL MATCH (target)-[:VALUE]->(v:Value)
 
 OPTIONAL MATCH (target)-[:HAS_NETWORK_COST]->(net)
-OPTIONAL MATCH (net)-[:VALUE]->(net_val)
-OPTIONAL MATCH (net)-[:HAS_COPAY|HAS_COINSURANCE]->(net_detail)
+
+OPTIONAL MATCH (net)-[:HAS_COPAY]->(net_copay)
+OPTIONAL MATCH (net_copay)-[:COPAY_VALUE]->(net_copay_val)
+
+OPTIONAL MATCH (net)-[:HAS_COINSURANCE]->(net_coin)
+OPTIONAL MATCH (net_coin)-[:COINSURANCE_VALUE]->(net_coin_val)
 
 OPTIONAL MATCH (target)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
-OPTIONAL MATCH (oon)-[:VALUE]->(oon_val)
-OPTIONAL MATCH (oon)-[:HAS_COPAY|HAS_COINSURANCE]->(oon_detail)
+
+OPTIONAL MATCH (oon)-[:HAS_COPAY]->(oon_copay)
+OPTIONAL MATCH (oon_copay)-[:COPAY_VALUE]->(oon_copay_val)
+
+OPTIONAL MATCH (oon)-[:HAS_COINSURANCE]->(oon_coin)
+OPTIONAL MATCH (oon_coin)-[:COINSURANCE_VALUE]->(oon_coin_val)
 
 RETURN 
     s.name AS matched_entity,
     target.name AS service,
     "QUESTION_MATCH" AS relationship,
-
     v.value AS result,
 
-    net_val.name AS network_cost,
-    net_detail.name AS network_details,
+    q.value AS question,
 
-    oon_val.name AS out_of_network_cost,
-    oon_detail.name AS out_of_network_details
+    net.name AS network_cost,
+    net_copay_val.value AS network_copay,
+    net_coin_val.value AS network_coinsurance,
+
+    oon.name AS out_of_network_cost,
+    oon_copay_val.value AS out_of_network_copay,
+    oon_coin_val.value AS out_of_network_coinsurance
+
 
 ----------------------------------
 SPECIALIZED PATTERNS
@@ -760,27 +804,33 @@ MATCH (s:Entity)
 WHERE toLower(s.name) CONTAINS toLower("<keyword>")
 
 OPTIONAL MATCH (s)-[:INCLUDES_SERVICE]->(svc)
-
 WITH s, COALESCE(svc, s) AS target
 
 OPTIONAL MATCH (target)-[:HAS_NETWORK_COST]->(net)
-OPTIONAL MATCH (net)-[:VALUE]->(net_val)
-OPTIONAL MATCH (net)-[:HAS_COPAY|HAS_COINSURANCE]->(net_detail)
+
+OPTIONAL MATCH (net)-[:HAS_COPAY]->(net_copay)
+OPTIONAL MATCH (net_copay)-[:COPAY_VALUE]->(net_copay_val)
+
+OPTIONAL MATCH (net)-[:HAS_COINSURANCE]->(net_coin)
+OPTIONAL MATCH (net_coin)-[:COINSURANCE_VALUE]->(net_coin_val)
 
 OPTIONAL MATCH (target)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
-OPTIONAL MATCH (oon)-[:VALUE]->(oon_val)
-OPTIONAL MATCH (oon)-[:HAS_COPAY|HAS_COINSURANCE]->(oon_detail)
+
+OPTIONAL MATCH (oon)-[:HAS_COPAY]->(oon_copay)
+OPTIONAL MATCH (oon_copay)-[:COPAY_VALUE]->(oon_copay_val)
+
+OPTIONAL MATCH (oon)-[:HAS_COINSURANCE]->(oon_coin)
+OPTIONAL MATCH (oon_coin)-[:COINSURANCE_VALUE]->(oon_coin_val)
 
 RETURN 
     s.name AS matched_entity,
     target.name AS service,
-    
-    net_val.name AS network_cost,
-    net_detail.name AS network_details,
 
-    oon_val.name AS out_of_network_cost,
-    oon_detail.name AS out_of_network_details
+    net_copay_val.value AS network_copay,
+    net_coin_val.value AS network_coinsurance,
 
+    oon_copay_val.value AS out_of_network_copay,
+    oon_coin_val.value AS out_of_network_coinsurance
 ----------------------------------
 
 ### 2. DEDUCTIBLE
@@ -792,14 +842,12 @@ OPTIONAL MATCH (e)-[r]-(v)
 RETURN 
     e.name AS entity,
     type(r) AS relationship,
-    coalesce(
-        e.answer,
-        e.value,
-        e.network_cost,
-        e.out_of_network_cost,
-        v.value,
-        v.name
-    ) AS result
+    v.value AS values,
+    v.name AS value_names,
+    e.answer AS answers,
+    e.value AS direct_values,
+    e.network_cost AS network_cost,
+    e.out_of_network_cost AS out_of_network_cost
 ORDER BY relationship
 ------------------------------------------
 ### 3. OUT OF POCKET LIMIT
@@ -828,14 +876,19 @@ RETURN
 MATCH (s:Entity)
 WHERE toLower(s.name) CONTAINS toLower("<keyword>")
 
-OPTIONAL MATCH (s)-[:HAS_LIMITATION]->(lim)
+OPTIONAL MATCH (s)-[:INCLUDES_SERVICE]->(svc)
+
+WITH s, COALESCE(svc, s) AS target
+
+OPTIONAL MATCH (target)-[:HAS_LIMITATION]->(lim)
 OPTIONAL MATCH (lim)-[:TEXT]->(val)
 
 RETURN 
     s.name AS entity,
+    target.name AS service,
     "HAS_LIMITATION" AS relationship,
     val.name AS result
-ORDER BY entity
+ORDER BY service
 
 ----------------------------------
 
@@ -908,26 +961,36 @@ ORDER BY s.value IS NULL
 
 ### 11. IMPORTANT QUESTIONS
 MATCH (s:Entity)-[:QUESTION]->(q:Value)
-WHERE toLower(q.value) CONTAINS toLower("<keyword>")
+WHERE toLower(q.name) CONTAINS toLower("<keyword")
 
-OPTIONAL MATCH (s)-[:VALUE]->(v:Value)
+OPTIONAL MATCH (s)-[:INCLUDES_SERVICE]->(svc)
+WITH s, COALESCE(svc, s) AS target
 
-OPTIONAL MATCH (s)-[:HAS_NETWORK_COST]->(net)
-OPTIONAL MATCH (net)-[:VALUE]->(net_val)
-OPTIONAL MATCH (net)-[:HAS_COPAY|HAS_COINSURANCE]->(net_detail)
+OPTIONAL MATCH (target)-[:HAS_NETWORK_COST]->(net)
 
-OPTIONAL MATCH (s)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
-OPTIONAL MATCH (oon)-[:VALUE]->(oon_val)
-OPTIONAL MATCH (oon)-[:HAS_COPAY|HAS_COINSURANCE]->(oon_detail)
+OPTIONAL MATCH (net)-[:HAS_COPAY]->(net_copay)
+OPTIONAL MATCH (net_copay)-[:COPAY_VALUE]->(net_copay_val)
+
+OPTIONAL MATCH (net)-[:HAS_COINSURANCE]->(net_coin)
+OPTIONAL MATCH (net_coin)-[:COINSURANCE_VALUE]->(net_coin_val)
+
+OPTIONAL MATCH (target)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
+
+OPTIONAL MATCH (oon)-[:HAS_COPAY]->(oon_copay)
+OPTIONAL MATCH (oon_copay)-[:COPAY_VALUE]->(oon_copay_val)
+
+OPTIONAL MATCH (oon)-[:HAS_COINSURANCE]->(oon_coin)
+OPTIONAL MATCH (oon_coin)-[:COINSURANCE_VALUE]->(oon_coin_val)
 
 RETURN 
-    s.name AS entity,
-    "QUESTION_MATCH" AS relationship,
-    v.value AS result,
-    net_val.name AS network_cost,
-    net_detail.name AS network_details,
-    oon_val.name AS out_of_network_cost,
-    oon_detail.name AS out_of_network_details
+    s.name AS matched_entity,
+    target.name AS service,
+
+    net_copay_val.value AS network_copay,
+    net_coin_val.value AS network_coinsurance,
+
+    oon_copay_val.value AS out_of_network_copay,
+    oon_coin_val.value AS out_of_network_coinsurance
 
 --------------------------------------------------
 
@@ -969,7 +1032,6 @@ RETURN
 ORDER BY entity
 
 ----------------------------------
-
 
 ### EXAMPLES
 
@@ -1134,3 +1196,251 @@ ONLY Cypher query.
         print(f" Cypher generation failed: {e}")
 
        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from groq import Groq
+# import os
+# from sympy import re
+
+# import re
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
+# # Pricing (example for llama-4-maverick)
+# INPUT_PRICE_PER_MILLION = 0.25
+# OUTPUT_PRICE_PER_MILLION = 0.75
+
+# # Context window
+# MODEL_CONTEXT_LIMIT = 128000
+
+# # GROQ API KEY
+# GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+# if not GROQ_API_KEY:
+#     raise ValueError("GROQ_API_KEY not found in .env file!")
+
+# # GROQ CLIENT
+# client = Groq(api_key=GROQ_API_KEY)
+
+
+# def clean_cypher(cypher: str) -> str:
+#     cypher = cypher.strip()
+
+#     # remove markdown fences
+#     cypher = re.sub(r"```(?:cypher)?", "", cypher)
+#     cypher = cypher.replace("```", "")
+
+#     # remove anything before MATCH/CALL
+#     match = re.search(r"(MATCH|CALL|WITH|UNWIND).*", cypher, re.DOTALL)
+#     if match:
+#         cypher = match.group(0)
+
+#     return cypher.strip()
+
+
+# def question_to_cypher(question):
+#     """
+#     Deterministic Cypher generator aligned with ACTUAL Neo4j structure
+#     """
+
+#     prompt = f"""
+# You are a STRICT Neo4j Cypher generator.
+
+# You MUST follow templates EXACTLY.
+# DO NOT invent variables.
+# DO NOT modify query structure.
+
+# ----------------------------------
+# REAL GRAPH STRUCTURE (IMPORTANT)
+# ----------------------------------
+
+# (:Entity {{name: "Service"}})
+
+# (:Entity)-[:INCLUDES_SERVICE]->(:Entity)
+
+# Service → HAS_NETWORK_COST → NetworkNode
+# Service → HAS_OUT_OF_NETWORK_COST → OONNode
+
+# NetworkNode → VALUE → ValueNode
+# OONNode → VALUE → ValueNode
+
+# NetworkNode → HAS_COPAY → CopayNode
+# NetworkNode → HAS_COINSURANCE → CoinsuranceNode
+
+# OONNode → HAS_COPAY → CopayNode
+# OONNode → HAS_COINSURANCE → CoinsuranceNode
+
+# CopayNode → COPAY_VALUE → ValueNode
+# CoinsuranceNode → COINSURANCE_VALUE → ValueNode
+
+# Service → HAS_LIMITATION → LimitationNode
+# LimitationNode → TEXT → ValueNode
+
+# Service → REQUIRES → Preauthorization
+
+# ----------------------------------
+# CRITICAL RULES (DO NOT BREAK)
+# ----------------------------------
+
+# 1. Return ONLY valid Cypher.
+
+# 2. ALWAYS use:
+#    toLower(s.name) CONTAINS toLower("<keyword>")
+
+# 3. NEVER invent variable names: net_detail_val, oon_detail_val, anything new
+
+# 4. ONLY use these variables:
+#    s, net, oon, detail, val
+
+# 5. VALUE can come from multiple places:
+#    - (net)-[:VALUE]->(val)
+#    - (detail)-[:VALUE]->(val)
+#    - (copay)-[:COPAY_VALUE]->(val)
+#    - (coinsurance)-[:COINSURANCE_VALUE]->(val)
+
+# 6. ALWAYS return EXACTLY:
+#    entity, relationship, result
+
+# 7. NO explanations. ONLY Cypher.
+
+# 8. USE the specialized patterns for related questions.
+
+# 9. If the question mentions Peg, Joe or Mia, THEN ALWAYS USE the specialized COVERAGE EXAMPLE Cypher pattern.
+
+# 10. If the question matches the ones from EXAMPLES, USE THE SAME PATTERN.
+
+# ---------------------------------
+# SMART QUERY PATTERNS
+# ---------------------------------
+
+# MATCH (s:Entity)-[:QUESTION]->(q:Value)
+# WHERE toLower(q.value) CONTAINS toLower("<keyword>")
+
+# OPTIONAL MATCH (s)-[:INCLUDES_SERVICE]->(svc)
+# WITH s, q, COALESCE(svc, s) AS target
+
+# OPTIONAL MATCH (target)-[:VALUE]->(v:Value)
+
+# OPTIONAL MATCH (target)-[:HAS_NETWORK_COST]->(net)
+
+# OPTIONAL MATCH (net)-[:HAS_COPAY]->(net_copay)
+# OPTIONAL MATCH (net_copay)-[:COPAY_VALUE]->(net_copay_val)
+
+# OPTIONAL MATCH (net)-[:HAS_COINSURANCE]->(net_coin)
+# OPTIONAL MATCH (net_coin)-[:COINSURANCE_VALUE]->(net_coin_val)
+
+# OPTIONAL MATCH (target)-[:HAS_OUT_OF_NETWORK_COST]->(oon)
+
+# OPTIONAL MATCH (oon)-[:HAS_COPAY]->(oon_copay)
+# OPTIONAL MATCH (oon_copay)-[:COPAY_VALUE]->(oon_copay_val)
+
+# OPTIONAL MATCH (oon)-[:HAS_COINSURANCE]->(oon_coin)
+# OPTIONAL MATCH (oon_coin)-[:COINSURANCE_VALUE]->(oon_coin_val)
+
+# RETURN 
+#     s.name AS matched_entity,
+#     target.name AS service,
+#     "QUESTION_MATCH" AS relationship,
+#     v.value AS result,
+
+#     q.value AS question,
+
+#     net.name AS network_cost,
+#     net_copay_val.value AS network_copay,
+#     net_coin_val.value AS network_coinsurance,
+
+#     oon.name AS out_of_network_cost,
+#     oon_copay_val.value AS out_of_network_copay,
+#     oon_coin_val.value AS out_of_network_coinsurance
+
+# QUESTION:
+# {question}
+
+# OUTPUT:
+# ONLY Cypher query.
+# """
+
+#     try:
+
+#         response = client.chat.completions.create(
+#             model="llama-3.3-70b-versatile",
+#             messages=[
+#                 {"role": "user", "content": prompt}
+#             ],
+#             temperature=0,
+#             top_p=0.1,
+#             max_tokens=500
+#         )
+
+#         raw_output = response.choices[0].message.content
+
+#         print("\nRAW LLM OUTPUT:\n", raw_output[:300], "...")
+
+#         # =========================
+#         # TOKEN USAGE
+#         # =========================
+#         prompt_tokens = response.usage.prompt_tokens
+#         completion_tokens = response.usage.completion_tokens
+#         total_tokens = response.usage.total_tokens
+
+#         # =========================
+#         # COST CALCULATION
+#         # =========================
+#         input_cost = (
+#             prompt_tokens / 1_000_000
+#         ) * INPUT_PRICE_PER_MILLION
+
+#         output_cost = (
+#             completion_tokens / 1_000_000
+#         ) * OUTPUT_PRICE_PER_MILLION
+
+#         total_cost = input_cost + output_cost
+
+#         # =========================
+#         # REMAINING TOKENS
+#         # =========================
+#         remaining_tokens = MODEL_CONTEXT_LIMIT - total_tokens
+
+#         # =========================
+#         # PRINT STATS
+#         # =========================
+#         print("\n========== CYPHER GENERATOR USAGE ==========")
+#         print(f"Prompt Tokens      : {prompt_tokens}")
+#         print(f"Completion Tokens  : {completion_tokens}")
+#         print(f"Total Tokens       : {total_tokens}")
+#         print(f"Remaining Tokens   : {remaining_tokens}")
+
+#         print("\n========== CYPHER GENERATOR COST ==========")
+#         print(f"Input Cost         : ${input_cost:.6f}")
+#         print(f"Output Cost        : ${output_cost:.6f}")
+#         print(f"Total Cost         : ${total_cost:.6f}")
+
+#         cypher = raw_output.strip()
+
+#         # Clean code blocks
+#         cypher = re.sub(r"```(?:cypher)?\s*", "", cypher)
+#         cypher = re.sub(r"```\s*$", "", cypher)
+
+#         return {
+#             "cypher": cypher.strip(),
+#             "prompt_tokens": prompt_tokens,
+#             "completion_tokens": completion_tokens,
+#             "total_tokens": total_tokens,
+#             "total_cost": total_cost
+#         }
+
+#     except Exception as e:
+#         print(f"Cypher generation failed: {e}")

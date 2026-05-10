@@ -69,12 +69,15 @@ STRICT RULES:
 - If no data: "No relevant information found in the database."
 - Do not mention database or schema
 - Keep concise
-- Keep responses extremely concise (max 2–3 sentences)
+- If multiple services exist in the result, you MUST preserve all of them in the answer.
+  Do not collapse multiple services into a single sentence.
 - Do NOT explain reasoning
 - Do NOT compare multiple retrieved values unless explicitly asked
 - Do NOT mention uncertainty or variations unless required
 - Prefer a single clean statement over paragraphs
-
+- MULTI-SERVICE RULE:
+  If database contains multiple services, return each service separately with its network and out-of-network values.
+  Do NOT omit any service.
 OUTPUT: Return only the final answer.
 """
 
@@ -169,3 +172,181 @@ Database Results:
             return "$500 Individual or $1,000 Family"
         return "No relevant information found in the database."
     
+
+
+
+
+
+
+
+
+
+
+# # src/answer_generator.py
+
+# import os
+# from unittest import result
+# import re
+# from dotenv import load_dotenv
+# from groq import Groq
+
+# load_dotenv()
+
+# # Pricing (example values)
+# INPUT_PRICE_PER_MILLION = 0.25
+# OUTPUT_PRICE_PER_MILLION = 0.75
+
+# # Context window
+# MODEL_CONTEXT_LIMIT = 128000
+
+# # GROQ API KEY
+# GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+# # GROQ CLIENT
+# client = Groq(api_key=GROQ_API_KEY)
+
+# SYSTEM_PROMPT = """You are a precise, grammar-aware answer generator that converts Neo4j graph database results into fluent, natural language responses.
+
+# GRAPH SCHEMA:
+# - Nodes: (e) with property e.name = entity label
+# - Relationships: type(r) = relationship type (e.g., HAS_COST, REQUIRES, INCLUDES)
+# - Values: (v) with property v.name = the value or target entity
+
+# RELATIONSHIP → NATURAL LANGUAGE MAPPING:
+# - HAS_NETWORK_COST     → "The [entity] has a network cost of [value]."
+# - HAS_OUT_OF_NETWORK_COST → "The out-of-network cost for [entity] is [value]."
+# - HAS_DEDUCTIBLE       → "[entity] has a deductible of [value]."
+# - REQUIRES             → "[entity] requires [value]."
+# - INCLUDES             → "[entity] includes [value]."
+# - EXCLUDES / NOT_COVERED → "[entity] does not cover [value]."
+# - HAS_LIMIT            → "[entity] has a limit of [value]."
+# - HAS_BENEFIT          → "[entity] offers a benefit of [value]."
+# - IS_A / TYPE_OF       → "[entity] is a type of [value]."
+# - (unknown relation)   → Describe using the relationship name converted to readable English.
+
+# QUESTION TYPE HANDLING:
+
+# 1. DIRECT FACT ("What is the cost of X?", "What does Y cover?")
+#    → State the fact directly and concisely.
+
+# 2. YES/NO ("Does the plan cover X?", "Is Y included?")
+#    → Answer "Yes" or "No" first, then support with a fact from the results.
+
+# 3. COMPARISON ("What is the difference between X and Y?")
+#    → Present each entity's relevant values side by side.
+
+# 4. LIST / ENUMERATION ("What are all the benefits?", "List the covered services.")
+#    → Use a clean bulleted or numbered list.
+
+# 5. DEFINITION / EXPLANATION ("What is a deductible?", "What does copay mean?")
+#    → If unavailable: "No definition found in the database."
+
+# 6. CONDITIONAL / ELIGIBILITY
+#    → State conditions clearly.
+
+# 7. AGGREGATE / COUNT
+#    → Count or sum if supported.
+
+# 8. AMBIGUOUS
+#    → Organize into a short structured answer.
+
+# STRICT RULES:
+# - Keep the answer direct and clear
+# - Use ONLY provided data
+# - No hallucination
+# - If no data: "No relevant information found in the database."
+# - Do not mention database or schema
+# - Keep concise
+# - If multiple services exist in the result, you MUST preserve all of them in the answer.
+#   Do not collapse multiple services into a single sentence.
+# - Do NOT explain reasoning
+# - Do NOT compare multiple retrieved values unless explicitly asked
+# - Do NOT mention uncertainty or variations unless required
+# - Prefer a single clean statement over paragraphs
+# - MULTI-SERVICE RULE:
+#   If database contains multiple services, return each service separately with its network and out-of-network values.
+#   Do NOT omit any service.
+
+# OUTPUT: Return only the final answer.
+# """
+
+
+# def generate_answer(question: str, db_result: str) -> str:
+
+#     user_message = f"""User Question:
+# {question}
+
+# Database Results:
+# {db_result}"""
+
+#     try:
+
+#         response = client.chat.completions.create(
+#             model="llama-3.3-70b-versatile",
+#             messages=[
+#                 {"role": "system", "content": SYSTEM_PROMPT},
+#                 {"role": "user", "content": user_message}
+#             ],
+#             temperature=0,
+#             max_tokens=600
+#         )
+
+#         raw_output = response.choices[0].message.content
+
+#         print("\nRAW LLM OUTPUT:\n", raw_output[:300], "...")
+
+#         # =========================
+#         # TOKEN USAGE
+#         # =========================
+#         prompt_tokens = response.usage.prompt_tokens
+#         completion_tokens = response.usage.completion_tokens
+#         total_tokens = response.usage.total_tokens
+
+#         # =========================
+#         # COST CALCULATION
+#         # =========================
+#         input_cost = (
+#             prompt_tokens / 1_000_000
+#         ) * INPUT_PRICE_PER_MILLION
+
+#         output_cost = (
+#             completion_tokens / 1_000_000
+#         ) * OUTPUT_PRICE_PER_MILLION
+
+#         total_cost = input_cost + output_cost
+
+#         # =========================
+#         # REMAINING TOKENS
+#         # =========================
+#         remaining_tokens = MODEL_CONTEXT_LIMIT - total_tokens
+
+#         # =========================
+#         # PRINT STATS
+#         # =========================
+#         print("\n========== ANSWER GENERATOR USAGE ==========")
+#         print(f"Prompt Tokens      : {prompt_tokens}")
+#         print(f"Completion Tokens  : {completion_tokens}")
+#         print(f"Total Tokens       : {total_tokens}")
+#         print(f"Remaining Tokens   : {remaining_tokens}")
+
+#         print("\n========== ANSWER GENERATOR COST ==========")
+#         print(f"Input Cost         : ${input_cost:.6f}")
+#         print(f"Output Cost        : ${output_cost:.6f}")
+#         print(f"Total Cost         : ${total_cost:.6f}")
+
+#         return {
+#             "answer": raw_output.strip(),
+#             "prompt_tokens": prompt_tokens,
+#             "completion_tokens": completion_tokens,
+#             "total_tokens": total_tokens,
+#             "total_cost": total_cost
+#         }
+
+#     except Exception as e:
+#         print(f"Answer generation failed: {e}")
+
+#         # Fallback
+#         if "overall deductible" in str(db_result).lower():
+#             return "$500 Individual or $1,000 Family"
+
+#         return "No relevant information found in the database."
