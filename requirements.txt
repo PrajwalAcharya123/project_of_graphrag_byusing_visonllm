@@ -1,0 +1,16 @@
+neo4j
+groq
+python-dotenv
+pdfplumber
+langchain
+langchain-text-splitters
+langchain-community
+langchain-core
+tiktoken
+openai
+python-dotenv
+pdf2image
+pillow
+tqdm
+bs4
+streamlit

@@ -1,0 +1,5803 @@
+
+--- RAW LLM OUTPUT ---
+
+--- RAW LLM OUTPUT ---
+
+--- RAW LLM OUTPUT ---
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Insurance Company 1",
+    "Plan Option 1",
+    "Family",
+    "PPO",
+    "Summary of Benefits and Coverage",
+    "SBC",
+    "health plan",
+    "premium",
+    "Glossary",
+    "provider",
+    "deductible",
+    "coinsurance",
+    "copayment",
+    "preventive care",
+    "prescription drug"
+  ],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Family", "has", "PPO"],
+    ["Summary of Benefits and Coverage", "explains", "health plan"],
+    ["SBC", "shows", "premium"],
+    ["Glossary", "defines", "deductible"],
+    ["provider", "offers", "preventive care"],
+    ["deductible", "applies to", "prescription drug"],
+    ["coinsurance", "is part of", "health plan"],
+    ["copayment", "is part of", "health plan"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Insurance Company 1",
+    "Plan Option 1",
+    "Family",
+    "PPO",
+    "Summary of Benefits and Coverage",
+    "SBC",
+    "health plan",
+    "premium",
+    "Glossary",
+    "provider",
+    "deductible",
+    "coinsurance",
+    "copayment",
+    "preventive care",
+    "prescription drug"
+  ],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Family", "has", "PPO"],
+    ["Summary of Benefits and Coverage", "explains", "health plan"],
+    ["SBC", "shows", "premium"],
+    ["Glossary", "defines", "deductible"],
+    ["provider", "offers", "preventive care"],
+    ["deductible", "applies to", "prescription drug"],
+    ["coinsurance", "is part of", "health plan"],
+    ["copayment", "is part of", "health plan"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "plan",
+    "network providers",
+    "out-of-network providers",
+    "deductibles",
+    "out-of-pocket limit",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "health care",
+    "specialist",
+    "referral",
+    "deductible",
+    "coinsurance",
+    "services"
+  ],
+  "relationships": [
+    ["plan", "has", "deductibles"],
+    ["plan", "has", "out-of-pocket limit"],
+    ["plan", "uses", "network providers"],
+    ["network providers", "are part of", "plan"],
+    ["out-of-network providers", "are not part of", "plan"],
+    ["deductibles", "apply to", "services"],
+    ["out-of-pocket limit", "applies to", "services"],
+    ["copayments", "are part of", "out-of-pocket limit"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are not part of", "out-of-pocket limit"],
+    ["health care", "is provided by", "plan"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["deductible", "must be met before", "coinsurance"],
+    ["coinsurance", "applies after", "deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "plan",
+    "network providers",
+    "out-of-network providers",
+    "deductibles",
+    "out-of-pocket limit",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "health care",
+    "specialist",
+    "referral",
+    "deductible",
+    "coinsurance",
+    "services"
+  ],
+  "relationships": [
+    ["plan", "has", "deductibles"],
+    ["plan", "has", "out-of-pocket limit"],
+    ["plan", "uses", "network providers"],
+    ["network providers", "are part of", "plan"],
+    ["out-of-network providers", "are not part of", "plan"],
+    ["deductibles", "apply to", "services"],
+    ["out-of-pocket limit", "applies to", "services"],
+    ["copayments", "are part of", "out-of-pocket limit"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are not part of", "out-of-pocket limit"],
+    ["health care", "is provided by", "plan"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["deductible", "must be met before", "coinsurance"],
+    ["coinsurance", "applies after", "deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Provider",
+    "Medical Event",
+    "Primary care visit",
+    "Specialist visit",
+    "Preventive care",
+    "Diagnostic test",
+    "Imaging",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Health care provider",
+    "Clinic",
+    "Hospital",
+    "Ambulatory surgery center"
+  ],
+  "relationships": [
+    ["Provider", "offers", "Medical Event"],
+    ["Primary care visit", "is a type of", "Medical Event"],
+    ["Specialist visit", "is a type of", "Medical Event"],
+    ["Preventive care", "is a type of", "Medical Event"],
+    ["Diagnostic test", "is a type of", "Medical Event"],
+    ["Imaging", "is a type of", "Diagnostic test"],
+    ["Generic drugs", "are a type of", "Prescription drug"],
+    ["Preferred brand drugs", "are a type of", "Prescription drug"],
+    ["Non-preferred brand drugs", "are a type of", "Prescription drug"],
+    ["Specialty drugs", "are a type of", "Prescription drug"],
+    ["Facility fee", "is associated with", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are associated with", "Medical Event"],
+    ["Emergency room care", "is a type of", "Medical Event"],
+    ["Emergency medical transportation", "is a type of", "Medical Event"],
+    ["Urgent care", "is a type of", "Medical Event"],
+    ["Health care provider", "offers", "Medical Event"],
+    ["Clinic", "is a type of", "Health care provider"],
+    ["Hospital", "is a type of", "Health care provider"],
+    ["Ambulatory surgery center", "is a type of", "Health care provider"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Provider",
+    "Medical Event",
+    "Primary care visit",
+    "Specialist visit",
+    "Preventive care",
+    "Diagnostic test",
+    "Imaging",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Health care provider",
+    "Clinic",
+    "Hospital",
+    "Ambulatory surgery center"
+  ],
+  "relationships": [
+    ["Provider", "offers", "Medical Event"],
+    ["Primary care visit", "is a type of", "Medical Event"],
+    ["Specialist visit", "is a type of", "Medical Event"],
+    ["Preventive care", "is a type of", "Medical Event"],
+    ["Diagnostic test", "is a type of", "Medical Event"],
+    ["Imaging", "is a type of", "Diagnostic test"],
+    ["Generic drugs", "are a type of", "Prescription drug"],
+    ["Preferred brand drugs", "are a type of", "Prescription drug"],
+    ["Non-preferred brand drugs", "are a type of", "Prescription drug"],
+    ["Specialty drugs", "are a type of", "Prescription drug"],
+    ["Facility fee", "is associated with", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are associated with", "Medical Event"],
+    ["Emergency room care", "is a type of", "Medical Event"],
+    ["Emergency medical transportation", "is a type of", "Medical Event"],
+    ["Urgent care", "is a type of", "Medical Event"],
+    ["Health care provider", "offers", "Medical Event"],
+    ["Clinic", "is a type of", "Health care provider"],
+    ["Hospital", "is a type of", "Health care provider"],
+    ["Ambulatory surgery center", "is a type of", "Health care provider"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Mental health services",
+    "Behavioral health services",
+    "Substance abuse services",
+    "Inpatient services",
+    "Outpatient services",
+    "Office visits",
+    "Childbirth/delivery services",
+    "Maternity services",
+    "Home health care",
+    "Rehabilitation services",
+    "Habilitation services",
+    "Skilled nursing care",
+    "Durable medical equipment",
+    "Hospice services",
+    "Children's eye exam",
+    "Children's glasses",
+    "Children's dental check-up",
+    "Network Provider",
+    "Out-of-Network Provider"
+  ],
+  "relationships": [
+    ["Facility fee", "has", "coinsurance"],
+    ["Physician/surgeon fees", "has", "coinsurance"],
+    ["Anesthesia", "has", "coinsurance"],
+    ["Mental health services", "has", "coinsurance"],
+    ["Behavioral health services", "has", "coinsurance"],
+    ["Substance abuse services", "has", "coinsurance"],
+    ["Inpatient services", "has", "coinsurance"],
+    ["Outpatient services", "has", "coinsurance"],
+    ["Office visits", "has", "coinsurance"],
+    ["Childbirth/delivery services", "has", "coinsurance"],
+    ["Maternity services", "has", "coinsurance"],
+    ["Home health care", "has", "coinsurance"],
+    ["Rehabilitation services", "has", "coinsurance"],
+    ["Habilitation services", "has", "coinsurance"],
+    ["Skilled nursing care", "has", "coinsurance"],
+    ["Durable medical equipment", "has", "coinsurance"],
+    ["Hospice services", "has", "coinsurance"],
+    ["Children's eye exam", "has", "copay"],
+    ["Children's glasses", "has", "coinsurance"],
+    ["Children's dental check-up", "has", "no charge"],
+    ["Network Provider", "offers", "reduced cost"],
+    ["Out-of-Network Provider", "offers", "higher cost"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Mental health services",
+    "Behavioral health services",
+    "Substance abuse services",
+    "Inpatient services",
+    "Outpatient services",
+    "Office visits",
+    "Childbirth/delivery services",
+    "Maternity services",
+    "Home health care",
+    "Rehabilitation services",
+    "Habilitation services",
+    "Skilled nursing care",
+    "Durable medical equipment",
+    "Hospice services",
+    "Children's eye exam",
+    "Children's glasses",
+    "Children's dental check-up",
+    "Network Provider",
+    "Out-of-Network Provider"
+  ],
+  "relationships": [
+    ["Facility fee", "has", "coinsurance"],
+    ["Physician/surgeon fees", "has", "coinsurance"],
+    ["Anesthesia", "has", "coinsurance"],
+    ["Mental health services", "has", "coinsurance"],
+    ["Behavioral health services", "has", "coinsurance"],
+    ["Substance abuse services", "has", "coinsurance"],
+    ["Inpatient services", "has", "coinsurance"],
+    ["Outpatient services", "has", "coinsurance"],
+    ["Office visits", "has", "coinsurance"],
+    ["Childbirth/delivery services", "has", "coinsurance"],
+    ["Maternity services", "has", "coinsurance"],
+    ["Home health care", "has", "coinsurance"],
+    ["Rehabilitation services", "has", "coinsurance"],
+    ["Habilitation services", "has", "coinsurance"],
+    ["Skilled nursing care", "has", "coinsurance"],
+    ["Durable medical equipment", "has", "coinsurance"],
+    ["Hospice services", "has", "coinsurance"],
+    ["Children's eye exam", "has", "copay"],
+    ["Children's glasses", "has", "coinsurance"],
+    ["Children's dental check-up", "has", "no charge"],
+    ["Network Provider", "offers", "reduced cost"],
+    ["Out-of-Network Provider", "offers", "higher cost"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Cosmetic Surgery",
+    "Infertility Treatment",
+    "Dental Care",
+    "Private Duty Nursing",
+    "Long Term Care",
+    "Non-emergency care",
+    "Routine Foot Care",
+    "Routine eye care",
+    "Acupuncture",
+    "Chiropractic Care",
+    "Weight Loss Programs",
+    "Hearing Aids",
+    "Bariatric Surgery",
+    "Health Insurance Marketplace",
+    "HealthCare.gov",
+    "Plan",
+    "Policy",
+    "Claim",
+    "Grievance",
+    "Appeal",
+    "Minimum Essential Coverage"
+  ],
+  "relationships": [
+    ["Plan", "excludes", "Cosmetic Surgery"],
+    ["Plan", "excludes", "Infertility Treatment"],
+    ["Plan", "excludes", "Dental Care"],
+    ["Plan", "excludes", "Private Duty Nursing"],
+    ["Plan", "excludes", "Long Term Care"],
+    ["Plan", "excludes", "Non-emergency care"],
+    ["Plan", "excludes", "Routine Foot Care"],
+    ["Plan", "excludes", "Routine eye care"],
+    ["Plan", "covers", "Acupuncture"],
+    ["Plan", "covers", "Chiropractic Care"],
+    ["Plan", "covers", "Weight Loss Programs"],
+    ["Plan", "covers", "Hearing Aids"],
+    ["Plan", "covers", "Bariatric Surgery"],
+    ["Plan", "provides", "Minimum Essential Coverage"],
+    ["Health Insurance Marketplace", "offers", "individual insurance coverage"],
+    ["Policy", "documents", "excluded services"],
+    ["Claim", "may be", "denied"],
+    ["Grievance", "is", "complaint against plan"],
+    ["Appeal", "is", "complaint against claim denial"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Cosmetic Surgery",
+    "Infertility Treatment",
+    "Dental Care",
+    "Private Duty Nursing",
+    "Long Term Care",
+    "Non-emergency care",
+    "Routine Foot Care",
+    "Routine eye care",
+    "Acupuncture",
+    "Chiropractic Care",
+    "Weight Loss Programs",
+    "Hearing Aids",
+    "Bariatric Surgery",
+    "Health Insurance Marketplace",
+    "HealthCare.gov",
+    "Plan",
+    "Policy",
+    "Claim",
+    "Grievance",
+    "Appeal",
+    "Minimum Essential Coverage"
+  ],
+  "relationships": [
+    ["Plan", "excludes", "Cosmetic Surgery"],
+    ["Plan", "excludes", "Infertility Treatment"],
+    ["Plan", "excludes", "Dental Care"],
+    ["Plan", "excludes", "Private Duty Nursing"],
+    ["Plan", "excludes", "Long Term Care"],
+    ["Plan", "excludes", "Non-emergency care"],
+    ["Plan", "excludes", "Routine Foot Care"],
+    ["Plan", "excludes", "Routine eye care"],
+    ["Plan", "covers", "Acupuncture"],
+    ["Plan", "covers", "Chiropractic Care"],
+    ["Plan", "covers", "Weight Loss Programs"],
+    ["Plan", "covers", "Hearing Aids"],
+    ["Plan", "covers", "Bariatric Surgery"],
+    ["Plan", "provides", "Minimum Essential Coverage"],
+    ["Health Insurance Marketplace", "offers", "individual insurance coverage"],
+    ["Policy", "documents", "excluded services"],
+    ["Claim", "may be", "denied"],
+    ["Grievance", "is", "complaint against plan"],
+    ["Appeal", "is", "complaint against claim denial"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Insurance Company 1",
+    "Plan Option 1",
+    "Family",
+    "PPO",
+    "Summary of Benefits and Coverage",
+    "SBC",
+    "health plan",
+    "health care services",
+    "premium",
+    "Glossary",
+    "provider",
+    "deductible",
+    "coinsurance",
+    "copayment",
+    "preventive care",
+    "prescription drug"
+  ],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Family", "has", "PPO"],
+    ["Summary of Benefits and Coverage", "explains", "health plan"],
+    ["SBC", "shows", "health care services"],
+    ["health plan", "has", "premium"],
+    ["Glossary", "defines", "deductible"],
+    ["provider", "offers", "health care services"],
+    ["deductible", "applies to", "coinsurance"],
+    ["coinsurance", "relates to", "copayment"],
+    ["preventive care", "is covered by", "health plan"],
+    ["prescription drug", "has", "deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Insurance Company 1",
+    "Plan Option 1",
+    "Family",
+    "PPO",
+    "Summary of Benefits and Coverage",
+    "SBC",
+    "health plan",
+    "health care services",
+    "premium",
+    "Glossary",
+    "provider",
+    "deductible",
+    "coinsurance",
+    "copayment",
+    "preventive care",
+    "prescription drug"
+  ],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Family", "has", "PPO"],
+    ["Summary of Benefits and Coverage", "explains", "health plan"],
+    ["SBC", "shows", "health care services"],
+    ["health plan", "has", "premium"],
+    ["Glossary", "defines", "deductible"],
+    ["provider", "offers", "health care services"],
+    ["deductible", "applies to", "coinsurance"],
+    ["coinsurance", "relates to", "copayment"],
+    ["preventive care", "is covered by", "health plan"],
+    ["prescription drug", "has", "deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "plan",
+    "network providers",
+    "out-of-network providers",
+    "deductible",
+    "out-of-pocket limit",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "health care",
+    "specialist",
+    "referral",
+    "lab work"
+  ],
+  "relationships": [
+    ["plan", "has", "deductible"],
+    ["plan", "has", "out-of-pocket limit"],
+    ["plan", "uses", "network providers"],
+    ["plan", "covers", "health care"],
+    ["network providers", "are part of", "plan"],
+    ["out-of-network providers", "are not part of", "plan"],
+    ["deductible", "is paid by", "individual"],
+    ["out-of-pocket limit", "applies to", "individual"],
+    ["copayments", "are paid by", "individual"],
+    ["premiums", "are paid by", "individual"],
+    ["balance-billed charges", "are not included in", "out-of-pocket limit"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required by", "plan"],
+    ["lab work", "may be provided by", "out-of-network providers"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "plan",
+    "network providers",
+    "out-of-network providers",
+    "deductible",
+    "out-of-pocket limit",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "health care",
+    "specialist",
+    "referral",
+    "lab work"
+  ],
+  "relationships": [
+    ["plan", "has", "deductible"],
+    ["plan", "has", "out-of-pocket limit"],
+    ["plan", "uses", "network providers"],
+    ["plan", "covers", "health care"],
+    ["network providers", "are part of", "plan"],
+    ["out-of-network providers", "are not part of", "plan"],
+    ["deductible", "is paid by", "individual"],
+    ["out-of-pocket limit", "applies to", "individual"],
+    ["copayments", "are paid by", "individual"],
+    ["premiums", "are paid by", "individual"],
+    ["balance-billed charges", "are not included in", "out-of-pocket limit"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required by", "plan"],
+    ["lab work", "may be provided by", "out-of-network providers"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Provider",
+    "Medical Event",
+    "Office Visit",
+    "Primary Care",
+    "Specialist",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging",
+    "Prescription",
+    "Generic Drugs",
+    "Preferred Brand Drugs",
+    "Non-Preferred Brand Drugs",
+    "Specialty Drugs",
+    "Facility Fee",
+    "Physician",
+    "Surgeon",
+    "Emergency Room",
+    "Emergency Medical Transportation",
+    "Urgent Care",
+    "Health Care Provider",
+    "Clinic",
+    "Hospital"
+  ],
+  "relationships": [
+    ["Provider", "offers", "Medical Event"],
+    ["Medical Event", "includes", "Office Visit"],
+    ["Office Visit", "has", "Copay"],
+    ["Primary Care", "is a type of", "Office Visit"],
+    ["Specialist", "is a type of", "Office Visit"],
+    ["Preventive Care", "is a type of", "Medical Event"],
+    ["Diagnostic Test", "is a type of", "Medical Event"],
+    ["Imaging", "is a type of", "Diagnostic Test"],
+    ["Prescription", "is a type of", "Medical Event"],
+    ["Generic Drugs", "is a type of", "Prescription"],
+    ["Preferred Brand Drugs", "is a type of", "Prescription"],
+    ["Non-Preferred Brand Drugs", "is a type of", "Prescription"],
+    ["Specialty Drugs", "is a type of", "Prescription"],
+    ["Facility Fee", "is a type of", "Medical Event"],
+    ["Physician", "provides", "Medical Event"],
+    ["Surgeon", "provides", "Medical Event"],
+    ["Emergency Room", "provides", "Emergency Medical Transportation"],
+    ["Urgent Care", "is a type of", "Medical Event"],
+    ["Health Care Provider", "offers", "Medical Event"],
+    ["Clinic", "is a type of", "Health Care Provider"],
+    ["Hospital", "is a type of", "Health Care Provider"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Provider",
+    "Medical Event",
+    "Office Visit",
+    "Primary Care",
+    "Specialist",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging",
+    "Prescription",
+    "Generic Drugs",
+    "Preferred Brand Drugs",
+    "Non-Preferred Brand Drugs",
+    "Specialty Drugs",
+    "Facility Fee",
+    "Physician",
+    "Surgeon",
+    "Emergency Room",
+    "Emergency Medical Transportation",
+    "Urgent Care",
+    "Health Care Provider",
+    "Clinic",
+    "Hospital"
+  ],
+  "relationships": [
+    ["Provider", "offers", "Medical Event"],
+    ["Medical Event", "includes", "Office Visit"],
+    ["Office Visit", "has", "Copay"],
+    ["Primary Care", "is a type of", "Office Visit"],
+    ["Specialist", "is a type of", "Office Visit"],
+    ["Preventive Care", "is a type of", "Medical Event"],
+    ["Diagnostic Test", "is a type of", "Medical Event"],
+    ["Imaging", "is a type of", "Diagnostic Test"],
+    ["Prescription", "is a type of", "Medical Event"],
+    ["Generic Drugs", "is a type of", "Prescription"],
+    ["Preferred Brand Drugs", "is a type of", "Prescription"],
+    ["Non-Preferred Brand Drugs", "is a type of", "Prescription"],
+    ["Specialty Drugs", "is a type of", "Prescription"],
+    ["Facility Fee", "is a type of", "Medical Event"],
+    ["Physician", "provides", "Medical Event"],
+    ["Surgeon", "provides", "Medical Event"],
+    ["Emergency Room", "provides", "Emergency Medical Transportation"],
+    ["Urgent Care", "is a type of", "Medical Event"],
+    ["Health Care Provider", "offers", "Medical Event"],
+    ["Clinic", "is a type of", "Health Care Provider"],
+    ["Hospital", "is a type of", "Health Care Provider"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Mental health services",
+    "Behavioral health services",
+    "Substance abuse services",
+    "Inpatient services",
+    "Outpatient services",
+    "Office visits",
+    "Childbirth/delivery services",
+    "Maternity services",
+    "Home health care",
+    "Rehabilitation services",
+    "Habilitation services",
+    "Skilled nursing care",
+    "Durable medical equipment",
+    "Hospice services",
+    "Children's eye exam",
+    "Children's glasses",
+    "Children's dental check-up",
+    "Network Provider",
+    "Out-of-Network Provider"
+  ],
+  "relationships": [
+    ["Facility fee", "has", "coinsurance"],
+    ["Physician/surgeon fees", "has", "coinsurance"],
+    ["Anesthesia", "has", "coinsurance"],
+    ["Mental health services", "has", "coinsurance"],
+    ["Behavioral health services", "has", "coinsurance"],
+    ["Substance abuse services", "has", "coinsurance"],
+    ["Inpatient services", "has", "coinsurance"],
+    ["Outpatient services", "has", "coinsurance"],
+    ["Office visits", "has", "coinsurance"],
+    ["Childbirth/delivery services", "has", "coinsurance"],
+    ["Maternity services", "has", "coinsurance"],
+    ["Home health care", "has", "coinsurance"],
+    ["Rehabilitation services", "has", "coinsurance"],
+    ["Habilitation services", "has", "coinsurance"],
+    ["Skilled nursing care", "has", "coinsurance"],
+    ["Durable medical equipment", "has", "coinsurance"],
+    ["Hospice services", "has", "coinsurance"],
+    ["Children's eye exam", "has", "copay"],
+    ["Children's glasses", "has", "coinsurance"],
+    ["Children's dental check-up", "has", "no charge"],
+    ["Network Provider", "offers", "reduced cost"],
+    ["Out-of-Network Provider", "offers", "higher cost"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Mental health services",
+    "Behavioral health services",
+    "Substance abuse services",
+    "Inpatient services",
+    "Outpatient services",
+    "Office visits",
+    "Childbirth/delivery services",
+    "Maternity services",
+    "Home health care",
+    "Rehabilitation services",
+    "Habilitation services",
+    "Skilled nursing care",
+    "Durable medical equipment",
+    "Hospice services",
+    "Children's eye exam",
+    "Children's glasses",
+    "Children's dental check-up",
+    "Network Provider",
+    "Out-of-Network Provider"
+  ],
+  "relationships": [
+    ["Facility fee", "has", "coinsurance"],
+    ["Physician/surgeon fees", "has", "coinsurance"],
+    ["Anesthesia", "has", "coinsurance"],
+    ["Mental health services", "has", "coinsurance"],
+    ["Behavioral health services", "has", "coinsurance"],
+    ["Substance abuse services", "has", "coinsurance"],
+    ["Inpatient services", "has", "coinsurance"],
+    ["Outpatient services", "has", "coinsurance"],
+    ["Office visits", "has", "coinsurance"],
+    ["Childbirth/delivery services", "has", "coinsurance"],
+    ["Maternity services", "has", "coinsurance"],
+    ["Home health care", "has", "coinsurance"],
+    ["Rehabilitation services", "has", "coinsurance"],
+    ["Habilitation services", "has", "coinsurance"],
+    ["Skilled nursing care", "has", "coinsurance"],
+    ["Durable medical equipment", "has", "coinsurance"],
+    ["Hospice services", "has", "coinsurance"],
+    ["Children's eye exam", "has", "copay"],
+    ["Children's glasses", "has", "coinsurance"],
+    ["Children's dental check-up", "has", "no charge"],
+    ["Network Provider", "offers", "reduced cost"],
+    ["Out-of-Network Provider", "offers", "higher cost"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Cosmetic Surgery",
+    "Infertility Treatment",
+    "Dental Care",
+    "Private Duty Nursing",
+    "Long Term Care",
+    "Non-emergency care",
+    "Routine Foot Care",
+    "Routine eye care",
+    "Acupuncture",
+    "Chiropractic Care",
+    "Weight Loss Programs",
+    "Hearing Aids",
+    "Bariatric Surgery",
+    "Health Insurance Marketplace",
+    "HealthCare.gov",
+    "State agency",
+    "HHS",
+    "DOL",
+    "Plan document",
+    "Explanation of benefits",
+    "Minimum Essential Coverage"
+  ],
+  "relationships": [
+    ["Plan document", "excludes", "Cosmetic Surgery"],
+    ["Plan document", "excludes", "Infertility Treatment"],
+    ["Plan document", "excludes", "Dental Care"],
+    ["Plan document", "excludes", "Private Duty Nursing"],
+    ["Plan document", "excludes", "Long Term Care"],
+    ["Plan document", "excludes", "Non-emergency care"],
+    ["Plan document", "excludes", "Routine Foot Care"],
+    ["Plan document", "excludes", "Routine eye care"],
+    ["Plan document", "covers", "Acupuncture"],
+    ["Plan document", "covers", "Chiropractic Care"],
+    ["Plan document", "covers", "Weight Loss Programs"],
+    ["Plan document", "covers", "Hearing Aids"],
+    ["Plan document", "covers", "Bariatric Surgery"],
+    ["Health Insurance Marketplace", "offers", "individual insurance coverage"],
+    ["State agency", "helps with", "continuing coverage"],
+    ["HHS", "helps with", "continuing coverage"],
+    ["DOL", "helps with", "continuing coverage"],
+    ["Plan document", "provides", "Explanation of benefits"],
+    ["Explanation of benefits", "explains", "grievance and appeals rights"],
+    ["Plan document", "provides", "Minimum Essential Coverage"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Cosmetic Surgery",
+    "Infertility Treatment",
+    "Dental Care",
+    "Private Duty Nursing",
+    "Long Term Care",
+    "Non-emergency care",
+    "Routine Foot Care",
+    "Routine eye care",
+    "Acupuncture",
+    "Chiropractic Care",
+    "Weight Loss Programs",
+    "Hearing Aids",
+    "Bariatric Surgery",
+    "Health Insurance Marketplace",
+    "HealthCare.gov",
+    "State agency",
+    "HHS",
+    "DOL",
+    "Plan document",
+    "Explanation of benefits",
+    "Minimum Essential Coverage"
+  ],
+  "relationships": [
+    ["Plan document", "excludes", "Cosmetic Surgery"],
+    ["Plan document", "excludes", "Infertility Treatment"],
+    ["Plan document", "excludes", "Dental Care"],
+    ["Plan document", "excludes", "Private Duty Nursing"],
+    ["Plan document", "excludes", "Long Term Care"],
+    ["Plan document", "excludes", "Non-emergency care"],
+    ["Plan document", "excludes", "Routine Foot Care"],
+    ["Plan document", "excludes", "Routine eye care"],
+    ["Plan document", "covers", "Acupuncture"],
+    ["Plan document", "covers", "Chiropractic Care"],
+    ["Plan document", "covers", "Weight Loss Programs"],
+    ["Plan document", "covers", "Hearing Aids"],
+    ["Plan document", "covers", "Bariatric Surgery"],
+    ["Health Insurance Marketplace", "offers", "individual insurance coverage"],
+    ["State agency", "helps with", "continuing coverage"],
+    ["HHS", "helps with", "continuing coverage"],
+    ["DOL", "helps with", "continuing coverage"],
+    ["Plan document", "provides", "Explanation of benefits"],
+    ["Explanation of benefits", "explains", "grievance and appeals rights"],
+    ["Plan document", "provides", "Minimum Essential Coverage"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Insurance Company 1", "Plan Option 1", "Family", "PPO", "SBC", "Glossary"],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Plan Option 1", "is type", "PPO"],
+    ["SBC", "summarizes", "Plan Option 1"],
+    ["Glossary", "defines", "SBC"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Insurance Company 1", "Plan Option 1", "Family", "PPO", "SBC", "Glossary"],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Plan Option 1", "is type", "PPO"],
+    ["SBC", "summarizes", "Plan Option 1"],
+    ["Glossary", "defines", "SBC"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "policy",
+    "deductible",
+    "family",
+    "plan",
+    "services",
+    "preventive care",
+    "copayment",
+    "coinsurance",
+    "prescription drug",
+    "occupational therapy",
+    "network providers",
+    "out-of-pocket limit"
+  ],
+  "relationships": [
+    ["policy", "has", "deductible"],
+    ["family", "has", "deductible"],
+    ["plan", "covers", "services"],
+    ["plan", "has", "deductible"],
+    ["services", "require", "copayment"],
+    ["services", "require", "coinsurance"],
+    ["prescription drug", "has", "deductible"],
+    ["occupational therapy", "has", "deductible"],
+    ["network providers", "offer", "services"],
+    ["out-of-pocket limit", "applies to", "plan"],
+    ["family", "has", "out-of-pocket limit"],
+    ["policy", "has", "out-of-pocket limit"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "policy",
+    "deductible",
+    "family",
+    "plan",
+    "services",
+    "preventive care",
+    "copayment",
+    "coinsurance",
+    "prescription drug",
+    "occupational therapy",
+    "network providers",
+    "out-of-pocket limit"
+  ],
+  "relationships": [
+    ["policy", "has", "deductible"],
+    ["family", "has", "deductible"],
+    ["plan", "covers", "services"],
+    ["plan", "has", "deductible"],
+    ["services", "require", "copayment"],
+    ["services", "require", "coinsurance"],
+    ["prescription drug", "has", "deductible"],
+    ["occupational therapy", "has", "deductible"],
+    ["network providers", "offer", "services"],
+    ["out-of-pocket limit", "applies to", "plan"],
+    ["family", "has", "out-of-pocket limit"],
+    ["policy", "has", "out-of-pocket limit"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "part of", "plan"],
+    ["family out-of-pocket limit", "has", "individual limit"],
+    ["copayments", "excluded from", "premiums"],
+    ["balance-billed charges", "excluded from", "out-of-pocket limit"],
+    ["expenses", "paid by", "individual"],
+    ["health care", "covered by", "plan"],
+    ["provider network", "used by", "plan"],
+    ["network provider", "part of", "provider network"],
+    ["out-of-network provider", "not part of", "provider network"],
+    ["specialist", "seen with", "referral"],
+    ["referral", "required for", "specialist"],
+    ["services", "covered by", "plan"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "part of", "plan"],
+    ["family out-of-pocket limit", "has", "individual limit"],
+    ["copayments", "excluded from", "premiums"],
+    ["balance-billed charges", "excluded from", "out-of-pocket limit"],
+    ["expenses", "paid by", "individual"],
+    ["health care", "covered by", "plan"],
+    ["provider network", "used by", "plan"],
+    ["network provider", "part of", "provider network"],
+    ["out-of-network provider", "not part of", "provider network"],
+    ["specialist", "seen with", "referral"],
+    ["referral", "required for", "specialist"],
+    ["services", "covered by", "plan"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Copayment"],
+    ["Out-of-Network Provider", "offers", "Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preventive Care"],
+    ["Preauthorization", "required for", "Specialist"],
+    ["Preventive Care", "includes", "Diagnostic Test"],
+    ["Diagnostic Test", "includes", "Imaging"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Copayment"],
+    ["Out-of-Network Provider", "offers", "Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preventive Care"],
+    ["Preauthorization", "required for", "Specialist"],
+    ["Preventive Care", "includes", "Diagnostic Test"],
+    ["Diagnostic Test", "includes", "Imaging"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Ambulatory surgery center",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are part of", "Surgery"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "is part of", "Emergency room care"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Ambulatory surgery center",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are part of", "Surgery"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "is part of", "Emergency room care"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Insurance Company 1", "Plan Option 1", "Family", "PPO", "SBC", "Glossary"],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Plan Option 1", "is type", "PPO"],
+    ["SBC", "summarizes", "Plan Option 1"],
+    ["Glossary", "defines", "SBC"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Insurance Company 1", "Plan Option 1", "Family", "PPO", "SBC", "Glossary"],
+  "relationships": [
+    ["Insurance Company 1", "offers", "Plan Option 1"],
+    ["Plan Option 1", "covers", "Family"],
+    ["Plan Option 1", "is type", "PPO"],
+    ["SBC", "summarizes", "Plan Option 1"],
+    ["Glossary", "defines", "SBC"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "policy",
+    "deductible",
+    "family",
+    "plan",
+    "services",
+    "preventive care",
+    "copayment",
+    "coinsurance",
+    "prescription drug",
+    "occupational therapy",
+    "network providers",
+    "out-of-pocket limit"
+  ],
+  "relationships": [
+    ["policy", "covers", "services"],
+    ["family", "has", "deductible"],
+    ["plan", "covers", "preventive care"],
+    ["services", "require", "copayment"],
+    ["services", "require", "coinsurance"],
+    ["prescription drug", "has", "deductible"],
+    ["occupational therapy", "is", "service"],
+    ["network providers", "offer", "services"],
+    ["out-of-pocket limit", "applies to", "family"],
+    ["deductible", "is part of", "out-of-pocket limit"],
+    ["plan", "has", "out-of-pocket limit"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "policy",
+    "deductible",
+    "family",
+    "plan",
+    "services",
+    "preventive care",
+    "copayment",
+    "coinsurance",
+    "prescription drug",
+    "occupational therapy",
+    "network providers",
+    "out-of-pocket limit"
+  ],
+  "relationships": [
+    ["policy", "covers", "services"],
+    ["family", "has", "deductible"],
+    ["plan", "covers", "preventive care"],
+    ["services", "require", "copayment"],
+    ["services", "require", "coinsurance"],
+    ["prescription drug", "has", "deductible"],
+    ["occupational therapy", "is", "service"],
+    ["network providers", "offer", "services"],
+    ["out-of-pocket limit", "applies to", "family"],
+    ["deductible", "is part of", "out-of-pocket limit"],
+    ["plan", "has", "out-of-pocket limit"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "part of", "plan"],
+    ["family out-of-pocket limit", "has limit", "$4,000"],
+    ["individual", "has limit", "$8,000"],
+    ["copayments", "excluded from", "premiums"],
+    ["balance-billed charges", "excluded from", "out-of-pocket limit"],
+    ["expenses", "paid by", "individual"],
+    ["health care", "covered by", "plan"],
+    ["provider network", "used by", "plan"],
+    ["network provider", "part of", "provider network"],
+    ["out-of-network provider", "not part of", "provider network"],
+    ["specialist", "seen with", "referral"],
+    ["referral", "required for", "specialist"],
+    ["services", "covered by", "plan"],
+    ["lab work", "part of", "services"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "part of", "plan"],
+    ["family out-of-pocket limit", "has limit", "$4,000"],
+    ["individual", "has limit", "$8,000"],
+    ["copayments", "excluded from", "premiums"],
+    ["balance-billed charges", "excluded from", "out-of-pocket limit"],
+    ["expenses", "paid by", "individual"],
+    ["health care", "covered by", "plan"],
+    ["provider network", "used by", "plan"],
+    ["network provider", "part of", "provider network"],
+    ["out-of-network provider", "not part of", "provider network"],
+    ["specialist", "seen with", "referral"],
+    ["referral", "required for", "specialist"],
+    ["services", "covered by", "plan"],
+    ["lab work", "part of", "services"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Copayment"],
+    ["Out-of-Network Provider", "offers", "Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preauthorization"],
+    ["Preventive Care", "is", "Diagnostic Test"],
+    ["Diagnostic Test", "includes", "Imaging"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preauthorization", "is required for", "Imaging"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Copayment"],
+    ["Out-of-Network Provider", "offers", "Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preauthorization"],
+    ["Preventive Care", "is", "Diagnostic Test"],
+    ["Diagnostic Test", "includes", "Imaging"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preauthorization", "is required for", "Imaging"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT/PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT/PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "has", "coinsurance"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "preauthorization requirement"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT/PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT/PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "has", "coinsurance"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "preauthorization requirement"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription drug",
+    "Occupational therapy",
+    "Network providers",
+    "Out-of-pocket limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive care"],
+    ["Services", "require", "Copayment"],
+    ["Services", "require", "Coinsurance"],
+    ["Prescription drug", "has", "Deductible"],
+    ["Occupational therapy", "is", "Service"],
+    ["Network providers", "offer", "Services"],
+    ["Out-of-pocket limit", "applies to", "Plan"],
+    ["Family", "has", "Out-of-pocket limit"],
+    ["Plan", "has", "Out-of-pocket limit"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription drug",
+    "Occupational therapy",
+    "Network providers",
+    "Out-of-pocket limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive care"],
+    ["Services", "require", "Copayment"],
+    ["Services", "require", "Coinsurance"],
+    ["Prescription drug", "has", "Deductible"],
+    ["Occupational therapy", "is", "Service"],
+    ["Network providers", "offer", "Services"],
+    ["Out-of-pocket limit", "applies to", "Plan"],
+    ["Family", "has", "Out-of-pocket limit"],
+    ["Plan", "has", "Out-of-pocket limit"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "met", "overall limit"],
+    ["plan", "has", "out-of-network providers"],
+    ["family out-of-pocket limit", "is", "$4,000"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "part of expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["expenses", "do not count toward", "out-of-pocket limit"],
+    ["health care", "is", "part of plan"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are covered by", "plan"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "met", "overall limit"],
+    ["plan", "has", "out-of-network providers"],
+    ["family out-of-pocket limit", "is", "$4,000"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "part of expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["expenses", "do not count toward", "out-of-pocket limit"],
+    ["health care", "is", "part of plan"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are covered by", "plan"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Lower Copayment"],
+    ["Out-of-Network Provider", "offers", "Higher Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preventive Care"],
+    ["Preauthorization", "required for", "Specialist"],
+    ["Preventive Care", "exempt from", "Copayment"],
+    ["Diagnostic Test", "includes", "Imaging"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Lower Copayment"],
+    ["Out-of-Network Provider", "offers", "Higher Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preventive Care"],
+    ["Preauthorization", "required for", "Specialist"],
+    ["Preventive Care", "exempt from", "Copayment"],
+    ["Diagnostic Test", "includes", "Imaging"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "has", "coinsurance"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "preauthorization"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "has", "coinsurance"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "preauthorization"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "policy",
+    "deductible",
+    "family",
+    "plan",
+    "services",
+    "preventive care",
+    "copayment",
+    "coinsurance",
+    "prescription drug",
+    "occupational therapy",
+    "network providers",
+    "out-of-pocket limit"
+  ],
+  "relationships": [
+    ["policy", "covers", "services"],
+    ["family", "has", "deductible"],
+    ["plan", "covers", "preventive care"],
+    ["services", "require", "copayment"],
+    ["services", "require", "coinsurance"],
+    ["prescription drug", "has", "deductible"],
+    ["occupational therapy", "is", "service"],
+    ["network providers", "offer", "services"],
+    ["out-of-pocket limit", "applies to", "family"],
+    ["deductible", "is part of", "out-of-pocket limit"],
+    ["plan", "has", "out-of-pocket limit"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "policy",
+    "deductible",
+    "family",
+    "plan",
+    "services",
+    "preventive care",
+    "copayment",
+    "coinsurance",
+    "prescription drug",
+    "occupational therapy",
+    "network providers",
+    "out-of-pocket limit"
+  ],
+  "relationships": [
+    ["policy", "covers", "services"],
+    ["family", "has", "deductible"],
+    ["plan", "covers", "preventive care"],
+    ["services", "require", "copayment"],
+    ["services", "require", "coinsurance"],
+    ["prescription drug", "has", "deductible"],
+    ["occupational therapy", "is", "service"],
+    ["network providers", "offer", "services"],
+    ["out-of-pocket limit", "applies to", "family"],
+    ["deductible", "is part of", "out-of-pocket limit"],
+    ["plan", "has", "out-of-pocket limit"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "met", "overall limit"],
+    ["plan", "has", "out-of-network providers"],
+    ["family out-of-pocket limit", "is", "$4,000"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "not included in premiums"],
+    ["balance-billed charges", "are", "not included in out-of-pocket limit"],
+    ["expenses", "do not count toward", "out-of-pocket limit"],
+    ["health care", "is", "not covered by plan"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are", "covered by plan"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "met", "overall limit"],
+    ["plan", "has", "out-of-network providers"],
+    ["family out-of-pocket limit", "is", "$4,000"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "not included in premiums"],
+    ["balance-billed charges", "are", "not included in out-of-pocket limit"],
+    ["expenses", "do not count toward", "out-of-pocket limit"],
+    ["health care", "is", "not covered by plan"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are", "covered by plan"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Copayment"],
+    ["Out-of-Network Provider", "offers", "Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preauthorization"],
+    ["Preventive Care", "is", "Diagnostic Test"],
+    ["Diagnostic Test", "includes", "Imaging"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preauthorization", "affects", "Benefits"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Deductible",
+    "Copayment",
+    "Coinsurance",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Deductible", "applies to", "Coinsurance"],
+    ["Network Provider", "offers", "Copayment"],
+    ["Out-of-Network Provider", "offers", "Coinsurance"],
+    ["Medical Event", "involves", "Primary Care"],
+    ["Health Care Provider", "provides", "Preauthorization"],
+    ["Preventive Care", "is", "Diagnostic Test"],
+    ["Diagnostic Test", "includes", "Imaging"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preauthorization", "affects", "Benefits"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT/PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT/PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "is type of", "Medical attention"],
+    ["Emergency medical transportation", "is type of", "Medical attention"],
+    ["Urgent care", "is type of", "Medical attention"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital stay", "has", "Physician/surgeon fees"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT/PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT/PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "is type of", "Medical attention"],
+    ["Emergency medical transportation", "is type of", "Medical attention"],
+    ["Urgent care", "is type of", "Medical attention"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital stay", "has", "Physician/surgeon fees"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive care",
+    "Primary care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription drug",
+    "Occupational therapy",
+    "Network providers",
+    "Out-of-pocket limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive care"],
+    ["Plan", "requires", "Copayment"],
+    ["Plan", "requires", "Coinsurance"],
+    ["Prescription drug", "has", "Deductible"],
+    ["Occupational therapy", "is", "Service"],
+    ["Network providers", "are part of", "Plan"],
+    ["Out-of-pocket limit", "applies to", "Plan"],
+    ["Family", "has", "Out-of-pocket limit"],
+    ["Plan", "has", "Out-of-pocket limit"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive care",
+    "Primary care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription drug",
+    "Occupational therapy",
+    "Network providers",
+    "Out-of-pocket limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive care"],
+    ["Plan", "requires", "Copayment"],
+    ["Plan", "requires", "Coinsurance"],
+    ["Prescription drug", "has", "Deductible"],
+    ["Occupational therapy", "is", "Service"],
+    ["Network providers", "are part of", "Plan"],
+    ["Out-of-pocket limit", "applies to", "Plan"],
+    ["Family", "has", "Out-of-pocket limit"],
+    ["Plan", "has", "Out-of-pocket limit"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "charges more than", "network provider"],
+    ["family out-of-pocket limit", "has limit of", "$4,000"],
+    ["individual", "has limit of", "$8,000"],
+    ["copayments", "are part of", "expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are not part of", "out-of-pocket limits"],
+    ["health care", "is provided by", "provider network"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "may include", "lab work"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "charges more than", "network provider"],
+    ["family out-of-pocket limit", "has limit of", "$4,000"],
+    ["individual", "has limit of", "$8,000"],
+    ["copayments", "are part of", "expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are not part of", "out-of-pocket limits"],
+    ["health care", "is provided by", "provider network"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "may include", "lab work"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "is part of", "Coinsurance"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Network Provider", "offers", "Medical Event"],
+    ["Out-of-Network Provider", "offers", "Medical Event"],
+    ["Primary Care", "is type of", "Medical Event"],
+    ["Health Care Provider", "offers", "Preauthorization"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preventive Care", "is type of", "Medical Event"],
+    ["Diagnostic Test", "is type of", "Medical Event"],
+    ["Imaging", "is type of", "Diagnostic Test"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "is part of", "Coinsurance"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Network Provider", "offers", "Medical Event"],
+    ["Out-of-Network Provider", "offers", "Medical Event"],
+    ["Primary Care", "is type of", "Medical Event"],
+    ["Health Care Provider", "offers", "Preauthorization"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preventive Care", "is type of", "Medical Event"],
+    ["Diagnostic Test", "is type of", "Medical Event"],
+    ["Imaging", "is type of", "Diagnostic Test"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "has", "coinsurance"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "preauthorization"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "has", "coinsurance"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "preauthorization"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive Care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription Drug",
+    "Occupational Therapy",
+    "Network Providers",
+    "Out-of-Pocket Limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive Care"],
+    ["Preventive Care", "has", "Copayment"],
+    ["Preventive Care", "has", "Coinsurance"],
+    ["Prescription Drug", "has", "Deductible"],
+    ["Occupational Therapy", "is", "Service"],
+    ["Network Providers", "has", "Out-of-Pocket Limit"],
+    ["Out-of-Pocket Limit", "applies to", "Family"],
+    ["Out-of-Pocket Limit", "applies to", "Individual"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive Care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription Drug",
+    "Occupational Therapy",
+    "Network Providers",
+    "Out-of-Pocket Limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive Care"],
+    ["Preventive Care", "has", "Copayment"],
+    ["Preventive Care", "has", "Coinsurance"],
+    ["Prescription Drug", "has", "Deductible"],
+    ["Occupational Therapy", "is", "Service"],
+    ["Network Providers", "has", "Out-of-Pocket Limit"],
+    ["Out-of-Pocket Limit", "applies to", "Family"],
+    ["Out-of-Pocket Limit", "applies to", "Individual"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["plan", "has", "out-of-pocket limits"],
+    ["out-of-pocket limits", "apply to", "out-of-network providers"],
+    ["plan", "has", "family out-of-pocket limit"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "part of expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["expenses", "do not count towards", "out-of-pocket limit"],
+    ["plan", "covers", "health care"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are covered by", "plan"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services"
+  ],
+  "relationships": [
+    ["plan", "has", "out-of-pocket limits"],
+    ["out-of-pocket limits", "apply to", "out-of-network providers"],
+    ["plan", "has", "family out-of-pocket limit"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "part of expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["expenses", "do not count towards", "out-of-pocket limit"],
+    ["plan", "covers", "health care"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are covered by", "plan"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "applies to", "Office Visit"],
+    ["Coinsurance", "applies to", "Outpatient Services"],
+    ["Deductible", "must be met before", "Copayment"],
+    ["Network Provider", "offers", "Lower Costs"],
+    ["Out-of-Network Provider", "offers", "Higher Costs"],
+    ["Medical Event", "may require", "Preauthorization"],
+    ["Primary Care", "is a type of", "Medical Event"],
+    ["Health Care Provider", "may require", "Preauthorization"],
+    ["Preventive Care", "is covered with", "No Charge"],
+    ["Diagnostic Test", "may require", "Preauthorization"],
+    ["Imaging", "is a type of", "Diagnostic Test"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "applies to", "Office Visit"],
+    ["Coinsurance", "applies to", "Outpatient Services"],
+    ["Deductible", "must be met before", "Copayment"],
+    ["Network Provider", "offers", "Lower Costs"],
+    ["Out-of-Network Provider", "offers", "Higher Costs"],
+    ["Medical Event", "may require", "Preauthorization"],
+    ["Primary Care", "is a type of", "Medical Event"],
+    ["Health Care Provider", "may require", "Preauthorization"],
+    ["Preventive Care", "is covered with", "No Charge"],
+    ["Diagnostic Test", "may require", "Preauthorization"],
+    ["Imaging", "is a type of", "Diagnostic Test"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Ambulatory surgery center",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are part of", "Surgery"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "is part of", "Emergency room care"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Ambulatory surgery center",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are part of", "Surgery"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "is part of", "Emergency room care"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive Care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription Drug",
+    "Occupational Therapy",
+    "Network Providers",
+    "Out-of-Pocket Limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive Care"],
+    ["Preventive Care", "has", "Copayment"],
+    ["Preventive Care", "has", "Coinsurance"],
+    ["Prescription Drug", "has", "Deductible"],
+    ["Occupational Therapy", "is", "Service"],
+    ["Network Providers", "has", "Out-of-Pocket Limit"],
+    ["Out-of-Pocket Limit", "applies to", "Family"],
+    ["Out-of-Pocket Limit", "applies to", "Individual"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive Care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription Drug",
+    "Occupational Therapy",
+    "Network Providers",
+    "Out-of-Pocket Limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Plan", "covers", "Preventive Care"],
+    ["Preventive Care", "has", "Copayment"],
+    ["Preventive Care", "has", "Coinsurance"],
+    ["Prescription Drug", "has", "Deductible"],
+    ["Occupational Therapy", "is", "Service"],
+    ["Network Providers", "has", "Out-of-Pocket Limit"],
+    ["Out-of-Pocket Limit", "applies to", "Family"],
+    ["Out-of-Pocket Limit", "applies to", "Individual"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "charges more than", "network provider"],
+    ["family out-of-pocket limit", "has limit of", "$4,000"],
+    ["individual", "has limit of", "$8,000"],
+    ["copayments", "are part of", "expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are not part of", "out-of-pocket limits"],
+    ["health care", "is provided by", "provider network"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "may include", "lab work"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "charges more than", "network provider"],
+    ["family out-of-pocket limit", "has limit of", "$4,000"],
+    ["individual", "has limit of", "$8,000"],
+    ["copayments", "are part of", "expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are not part of", "out-of-pocket limits"],
+    ["health care", "is provided by", "provider network"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "may include", "lab work"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "is part of", "Coinsurance"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Network Provider", "offers", "Medical Event"],
+    ["Out-of-Network Provider", "offers", "Medical Event"],
+    ["Primary Care", "is type of", "Medical Event"],
+    ["Health Care Provider", "requires", "Preauthorization"],
+    ["Preventive Care", "is type of", "Medical Event"],
+    ["Diagnostic Test", "is type of", "Medical Event"],
+    ["Imaging", "is type of", "Diagnostic Test"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "is part of", "Coinsurance"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Network Provider", "offers", "Medical Event"],
+    ["Out-of-Network Provider", "offers", "Medical Event"],
+    ["Primary Care", "is type of", "Medical Event"],
+    ["Health Care Provider", "requires", "Preauthorization"],
+    ["Preventive Care", "is type of", "Medical Event"],
+    ["Diagnostic Test", "is type of", "Medical Event"],
+    ["Imaging", "is type of", "Diagnostic Test"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT/PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT/PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "is type of", "Medical attention"],
+    ["Emergency medical transportation", "is type of", "Medical attention"],
+    ["Urgent care", "is type of", "Medical attention"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital stay", "has", "Physician/surgeon fees"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT/PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT/PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Hospital stay"],
+    ["Physician/surgeon fees", "is part of", "Hospital stay"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "is type of", "Medical attention"],
+    ["Emergency medical transportation", "is type of", "Medical attention"],
+    ["Urgent care", "is type of", "Medical attention"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital stay", "has", "Physician/surgeon fees"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": ["Plan", "Insurance Company", "Family", "PPO", "SBC", "Glossary", "Provider", "Policy"],
+  "relationships": [
+    ["Plan", "covers", "Family"],
+    ["Insurance Company", "offers", "Plan"],
+    ["Plan", "has", "PPO"],
+    ["SBC", "summarizes", "Plan"],
+    ["Glossary", "defines", "Provider"],
+    ["Policy", "has", "Deductible"],
+    ["Plan", "has", "Deductible"],
+    ["Family", "pays", "Deductible"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive Care",
+    "Primary Care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription Drug",
+    "Occupational Therapy",
+    "Network Providers",
+    "Out-of-Pocket Limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "covers", "Preventive Care"],
+    ["Plan", "requires", "Deductible"],
+    ["Services", "may require", "Copayment"],
+    ["Services", "may require", "Coinsurance"],
+    ["Prescription Drug", "has", "Deductible"],
+    ["Occupational Therapy", "is a type of", "Services"],
+    ["Network Providers", "are part of", "Plan"],
+    ["Out-of-Pocket Limit", "applies to", "Family"],
+    ["Out-of-Pocket Limit", "applies to", "Individual"],
+    ["Deductible", "is part of", "Plan"],
+    ["Preventive Care", "is a type of", "Services"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Policy",
+    "Deductible",
+    "Family",
+    "Plan",
+    "Services",
+    "Preventive Care",
+    "Primary Care",
+    "Copayment",
+    "Coinsurance",
+    "Prescription Drug",
+    "Occupational Therapy",
+    "Network Providers",
+    "Out-of-Pocket Limit"
+  ],
+  "relationships": [
+    ["Policy", "covers", "Services"],
+    ["Family", "has", "Deductible"],
+    ["Plan", "covers", "Preventive Care"],
+    ["Plan", "requires", "Deductible"],
+    ["Services", "may require", "Copayment"],
+    ["Services", "may require", "Coinsurance"],
+    ["Prescription Drug", "has", "Deductible"],
+    ["Occupational Therapy", "is a type of", "Services"],
+    ["Network Providers", "are part of", "Plan"],
+    ["Out-of-Pocket Limit", "applies to", "Family"],
+    ["Out-of-Pocket Limit", "applies to", "Individual"],
+    ["Deductible", "is part of", "Plan"],
+    ["Preventive Care", "is a type of", "Services"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "exceeds", "family out-of-pocket limit"],
+    ["family out-of-pocket limit", "is", "$4,000"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are", "expenses"],
+    ["health care", "is", "covered by plan"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are", "covered by plan"],
+    ["lab work", "is", "service"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "out-of-pocket limits",
+    "overall limit",
+    "plan",
+    "out-of-network providers",
+    "family out-of-pocket limit",
+    "individual",
+    "copayments",
+    "premiums",
+    "balance-billed charges",
+    "expenses",
+    "health care",
+    "provider network",
+    "network provider",
+    "out-of-network provider",
+    "specialist",
+    "referral",
+    "services",
+    "lab work"
+  ],
+  "relationships": [
+    ["out-of-pocket limits", "applies to", "plan"],
+    ["overall limit", "includes", "out-of-pocket limits"],
+    ["out-of-network providers", "exceeds", "family out-of-pocket limit"],
+    ["family out-of-pocket limit", "is", "$4,000"],
+    ["individual", "has", "out-of-pocket limit"],
+    ["copayments", "are", "expenses"],
+    ["premiums", "do not include", "balance-billed charges"],
+    ["balance-billed charges", "are", "expenses"],
+    ["health care", "is", "covered by plan"],
+    ["provider network", "is used by", "plan"],
+    ["network provider", "is part of", "provider network"],
+    ["out-of-network provider", "is not part of", "provider network"],
+    ["specialist", "requires", "referral"],
+    ["referral", "is required for", "specialist"],
+    ["services", "are", "covered by plan"],
+    ["lab work", "is", "service"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "is part of", "Coinsurance"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Network Provider", "offers", "Medical Event"],
+    ["Out-of-Network Provider", "offers", "Medical Event"],
+    ["Primary Care", "is type of", "Medical Event"],
+    ["Health Care Provider", "offers", "Preauthorization"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preventive Care", "is type of", "Medical Event"],
+    ["Diagnostic Test", "is type of", "Medical Event"],
+    ["Imaging", "is type of", "Diagnostic Test"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Specialist",
+    "Referral",
+    "Copayment",
+    "Coinsurance",
+    "Deductible",
+    "Network Provider",
+    "Out-of-Network Provider",
+    "Medical Event",
+    "Primary Care",
+    "Health Care Provider",
+    "Preauthorization",
+    "Preventive Care",
+    "Diagnostic Test",
+    "Imaging"
+  ],
+  "relationships": [
+    ["Specialist", "requires", "Referral"],
+    ["Copayment", "is part of", "Coinsurance"],
+    ["Deductible", "applies to", "Copayment"],
+    ["Network Provider", "offers", "Medical Event"],
+    ["Out-of-Network Provider", "offers", "Medical Event"],
+    ["Primary Care", "is type of", "Medical Event"],
+    ["Health Care Provider", "offers", "Preauthorization"],
+    ["Preauthorization", "is required for", "Specialist"],
+    ["Preventive Care", "is type of", "Medical Event"],
+    ["Diagnostic Test", "is type of", "Medical Event"],
+    ["Imaging", "is type of", "Diagnostic Test"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+```
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Ambulatory surgery center",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are part of", "Surgery"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "is part of", "Emergency room care"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+```
+
+--- CLEANED JSON ---
+{
+  "entities": [
+    "Test",
+    "Imaging",
+    "CT scans",
+    "PET scans",
+    "MRIs",
+    "Prescription",
+    "Generic drugs",
+    "Preferred brand drugs",
+    "Non-preferred brand drugs",
+    "Specialty drugs",
+    "Facility fee",
+    "Ambulatory surgery center",
+    "Physician/surgeon fees",
+    "Anesthesia",
+    "Emergency room care",
+    "Emergency medical transportation",
+    "Urgent care",
+    "Hospital stay",
+    "Hospital room"
+  ],
+  "relationships": [
+    ["Test", "has", "copay"],
+    ["Imaging", "includes", "CT scans"],
+    ["Imaging", "includes", "PET scans"],
+    ["Imaging", "includes", "MRIs"],
+    ["Prescription", "has", "copay"],
+    ["Generic drugs", "is type of", "Prescription"],
+    ["Preferred brand drugs", "is type of", "Prescription"],
+    ["Non-preferred brand drugs", "is type of", "Prescription"],
+    ["Specialty drugs", "is type of", "Prescription"],
+    ["Facility fee", "is part of", "Ambulatory surgery center"],
+    ["Physician/surgeon fees", "are part of", "Surgery"],
+    ["Anesthesia", "is part of", "Surgery"],
+    ["Emergency room care", "has", "coinsurance"],
+    ["Emergency medical transportation", "is part of", "Emergency room care"],
+    ["Urgent care", "has", "copay"],
+    ["Hospital stay", "has", "Facility fee"],
+    ["Hospital room", "is part of", "Hospital stay"]
+  ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amounts for individual and family
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as they were not explicitly mentioned in the provided text. Let me know if you need further assistance!
+
+--- CLEANED JSON ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amounts for individual and family
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as they were not explicitly mentioned in the provided text. Let me know if you need further assistance!
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$300"],
+        ["Plan", "family deductible", "$500"],
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "occupational therapy deductible", "$300"],
+        ["Plan", "in-network out-of-pocket limit (individual)", "$2,500"],
+        ["Plan", "in-network out-of-pocket limit (family)", "$5,000"],
+        ["Plan", "out-of-network out-of-pocket limit (individual)", "$4,000"],
+        ["Plan", "out-of-network out-of-pocket limit (family)", "$4,000"],
+        ["Preventive care services", "cost-sharing", "no cost-sharing"],
+        ["Primary care services", "cost-sharing", "copayment or coinsurance may apply"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$300"],
+        ["Plan", "family deductible", "$500"],
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "occupational therapy deductible", "$300"],
+        ["Plan", "in-network out-of-pocket limit (individual)", "$2,500"],
+        ["Plan", "in-network out-of-pocket limit (family)", "$5,000"],
+        ["Plan", "out-of-network out-of-pocket limit (individual)", "$4,000"],
+        ["Plan", "out-of-network out-of-pocket limit (family)", "$4,000"],
+        ["Preventive care services", "cost-sharing", "no cost-sharing"],
+        ["Primary care services", "cost-sharing", "copayment or coinsurance may apply"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Plan", "out-of-pocket limit (individual)", "$8,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+```
+
+Note: The entities and relationships lists are empty as the provided text does not explicitly mention specific entities or relationships that can be extracted. The attributes list includes the extracted numeric values and meaningful attributes as per the rules.
+
+--- CLEANED JSON ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Plan", "out-of-pocket limit (individual)", "$8,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+```
+
+Note: The entities and relationships lists are empty as the provided text does not explicitly mention specific entities or relationships that can be extracted. The attributes list includes the extracted numeric values and meaningful attributes as per the rules.
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Plan", "deductible reduction for no preauthorization", "50%"]
+    ]
+}
+```
+
+Note: I've extracted the numeric values and meaningful attributes as per the rules. The entities are not explicitly mentioned in the text, so I've left the "entities" and "relationships" sections empty. If you need any further clarification or modifications, please let me know.
+
+--- CLEANED JSON ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Plan", "deductible reduction for no preauthorization", "50%"]
+    ]
+}
+```
+
+Note: I've extracted the numeric values and meaningful attributes as per the rules. The entities are not explicitly mentioned in the text, so I've left the "entities" and "relationships" sections empty. If you need any further clarification or modifications, please let me know.
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging (CT/PET scans, MRIs)", "copay", "$50"],
+        ["Imaging (CT/PET scans, MRIs)", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs (Tier 1)", "coinsurance", "40%"],
+        ["Preferred brand drugs (Tier 2)", "coinsurance", "40%"],
+        ["Non-preferred brand drugs (Tier 3)", "coinsurance", "40%"],
+        ["Specialty drugs (Tier 4)", "coinsurance", "50%"],
+        ["Facility fee (e.g., ambulatory surgery center)", "copay", "$100/day"],
+        ["Facility fee (e.g., ambulatory surgery center)", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Physician/surgeon fees", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "coinsurance", "40%"],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "20%"],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "40%"],
+        ["Anesthesia", "coinsurance", "50%"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging (CT/PET scans, MRIs)", "copay", "$50"],
+        ["Imaging (CT/PET scans, MRIs)", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs (Tier 1)", "coinsurance", "40%"],
+        ["Preferred brand drugs (Tier 2)", "coinsurance", "40%"],
+        ["Non-preferred brand drugs (Tier 3)", "coinsurance", "40%"],
+        ["Specialty drugs (Tier 4)", "coinsurance", "50%"],
+        ["Facility fee (e.g., ambulatory surgery center)", "copay", "$100/day"],
+        ["Facility fee (e.g., ambulatory surgery center)", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Physician/surgeon fees", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "coinsurance", "40%"],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "20%"],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "40%"],
+        ["Anesthesia", "coinsurance", "50%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amounts for individual and family
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as they were not explicitly mentioned in the provided text. Let me know if you need further assistance!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$300"],
+        ["Plan", "family deductible", "$500"],
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "occupational therapy deductible", "$300"],
+        ["Plan", "in-network out-of-pocket limit (individual)", "$2,500"],
+        ["Plan", "in-network out-of-pocket limit (family)", "$5,000"],
+        ["Plan", "out-of-network out-of-pocket limit (individual)", "$4,000"],
+        ["Plan", "out-of-network out-of-pocket limit (family)", "$4,000"],
+        ["Preventive care services", "cost-sharing", "no cost-sharing"],
+        ["Primary care services", "cost-sharing", "copayment or coinsurance may apply"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$300"],
+        ["Plan", "family deductible", "$500"],
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "occupational therapy deductible", "$300"],
+        ["Plan", "in-network out-of-pocket limit (individual)", "$2,500"],
+        ["Plan", "in-network out-of-pocket limit (family)", "$5,000"],
+        ["Plan", "out-of-network out-of-pocket limit (individual)", "$4,000"],
+        ["Plan", "out-of-network out-of-pocket limit (family)", "$4,000"],
+        ["Preventive care services", "cost-sharing", "no cost-sharing"],
+        ["Primary care services", "cost-sharing", "copayment or coinsurance may apply"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit (family)", "$4,000"],
+        ["Plan", "out-of-pocket limit (individual)", "$8,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+```
+
+Note: I've extracted the numeric values and meaningful attributes as per the rules. The entities and relationships are empty as there are no explicit entities or relationships mentioned in the text. The attributes are based on the plan, providers, and services mentioned in the text.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit (family)", "$4,000"],
+        ["Plan", "out-of-pocket limit (individual)", "$8,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"]
+    ]
+}
+```
+
+Note that I've focused on extracting the numeric values and meaningful attributes related to the different types of medical services mentioned in the text. Let me know if you'd like me to clarify or expand on this extraction.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Facility fee", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Physician/surgeon fees", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance for anesthesia", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "facility fee coinsurance", "20%"],
+        ["Hospital stay", "facility fee coinsurance", "40%"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Facility fee", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Physician/surgeon fees", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance for anesthesia", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "facility fee coinsurance", "20%"],
+        ["Hospital stay", "facility fee coinsurance", "40%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amounts for individual and family
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as there were no clear entities or relationships mentioned in the text. Let me know if you have any further questions or if you'd like me to clarify anything.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care", "cost-sharing", "No"],
+        ["Primary care", "copayment or coinsurance", "Yes"],
+        ["Plan", "annual deductible", "Varies"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care", "cost-sharing", "No"],
+        ["Primary care", "copayment or coinsurance", "Yes"],
+        ["Plan", "annual deductible", "Varies"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+```
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value triples:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$8,000"],
+        ["Plan", "individual out-of-pocket limit", "$4,000"],
+        ["Out-of-network provider", "balance billing", "yes"],
+        ["In-network provider", "cost savings", "yes"],
+        ["Specialist visit", "referral requirement", "yes"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value triples:
+
+
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$8,000"],
+        ["Plan", "individual out-of-pocket limit", "$4,000"],
+        ["Out-of-network provider", "balance billing", "yes"],
+        ["In-network provider", "cost savings", "yes"],
+        ["Specialist visit", "referral requirement", "yes"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+```
+
+Note that I've extracted the numeric values and meaningful attributes as per the rules. I've also tried to categorize the attributes in a way that makes sense, using the service type (e.g. "Primary care visit", "Specialist visit", etc.) as the entity, and the specific attribute (e.g. "copay", "coinsurance", etc.) as the attribute name. Let me know if you'd like me to revise anything!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "facility fee", "20%"],
+        ["Generic drugs", "supply limit", "30-day supply"],
+        ["Generic drugs", "supply limit", "31-90 day supply"],
+        ["Preauthorization", "penalty", "50% reduction"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "facility fee", "20%"],
+        ["Generic drugs", "supply limit", "30-day supply"],
+        ["Generic drugs", "supply limit", "31-90 day supply"],
+        ["Preauthorization", "penalty", "50% reduction"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Coverage Period", "start date", "1/1/2017"],
+        ["Coverage Period", "end date", "12/31/2017"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amount for individual and family plans
+- Coverage period start and end dates
+
+Note that I did not extract any entities or relationships as they were not explicitly mentioned in the provided text. Let me know if you need further assistance!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Coverage Period", "start date", "1/1/2017"],
+        ["Coverage Period", "end date", "12/31/2017"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care", "cost-sharing", "No"],
+        ["Primary care", "copayment or coinsurance", "Yes"],
+        ["Plan", "annual deductible", "Varies"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care", "cost-sharing", "No"],
+        ["Primary care", "copayment or coinsurance", "Yes"],
+        ["Plan", "annual deductible", "Varies"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance-billed charges", "not included in premiums"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "requirement", "yes"],
+        ["Specialist visit", "requirement", "referral required"]
+    ]
+}
+```
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value relationships:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$8,000"],
+        ["Plan", "individual out-of-pocket limit", "$4,000"],
+        ["In-network provider", "cost comparison", "less"],
+        ["Out-of-network provider", "cost comparison", "most"],
+        ["Plan", "referral requirement for specialist", "yes"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance-billed charges", "not included in premiums"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "requirement", "yes"],
+        ["Specialist visit", "requirement", "referral required"]
+    ]
+}
+
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value relationships:
+
+
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$8,000"],
+        ["Plan", "individual out-of-pocket limit", "$4,000"],
+        ["In-network provider", "cost comparison", "less"],
+        ["Out-of-network provider", "cost comparison", "most"],
+        ["Plan", "referral requirement for specialist", "yes"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+```
+
+Note that I've extracted the numeric values and meaningful attributes as per the rules. I've also tried to categorize the attributes in a way that makes sense, using the service type (e.g. "Primary care visit", "Specialist visit", etc.) as the entity, and the specific attribute (e.g. "copay", "coinsurance", etc.) as the attribute name. Let me know if you'd like me to revise anything!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "facility fee coinsurance", "40%"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "facility fee coinsurance", "40%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amount for individual and family
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as there were no clear entities or relationships mentioned in the text. Let me know if you have any further questions or if you'd like me to clarify anything.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care services", "cost-sharing", "No"],
+        ["Primary care services", "cost-sharing", "Yes, copayment or coinsurance may apply"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care services", "cost-sharing", "No"],
+        ["Primary care services", "cost-sharing", "Yes, copayment or coinsurance may apply"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance-billed charges", "not included in premiums"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "requirement", "yes"],
+        ["Specialist visit", "requirement", "referral required"]
+    ]
+}
+```
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value relationships:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$8,000"],
+        ["Plan", "individual out-of-pocket limit", "$4,000"],
+        ["In-network provider", "cost comparison", "less"],
+        ["Out-of-network provider", "cost comparison", "most"],
+        ["Plan", "referral requirement for specialist", "yes"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance-billed charges", "not included in premiums"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "requirement", "yes"],
+        ["Specialist visit", "requirement", "referral required"]
+    ]
+}
+
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value relationships:
+
+
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$8,000"],
+        ["Plan", "individual out-of-pocket limit", "$4,000"],
+        ["In-network provider", "cost comparison", "less"],
+        ["Out-of-network provider", "cost comparison", "most"],
+        ["Plan", "referral requirement for specialist", "yes"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+```
+
+Note that I've extracted the numeric values and meaningful attributes as per the rules. I've also tried to categorize the attributes into relevant entities (e.g., "Primary care visit", "Specialist visit", etc.). Let me know if you need any further assistance!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging (CT/PET scans, MRIs)", "copay", "$50"],
+        ["Imaging (CT/PET scans, MRIs)", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs (Tier 1)", "coinsurance", "40%"],
+        ["Preferred brand drugs (Tier 2)", "coinsurance", "40%"],
+        ["Non-preferred brand drugs (Tier 3)", "coinsurance", "40%"],
+        ["Specialty drugs (Tier 4)", "coinsurance", "50%"],
+        ["Facility fee (e.g., ambulatory surgery center)", "copay", "$100/day"],
+        ["Facility fee (e.g., ambulatory surgery center)", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Physician/surgeon fees", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "copay", ""],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "20%"],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "40%"]
+    ]
+}
+```
+
+Note: Some entities and attributes may not be explicitly mentioned in the text, but they can be inferred based on the context. The above JSON is an attempt to extract the most relevant information from the text.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging (CT/PET scans, MRIs)", "copay", "$50"],
+        ["Imaging (CT/PET scans, MRIs)", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs (Tier 1)", "coinsurance", "40%"],
+        ["Preferred brand drugs (Tier 2)", "coinsurance", "40%"],
+        ["Non-preferred brand drugs (Tier 3)", "coinsurance", "40%"],
+        ["Specialty drugs (Tier 4)", "coinsurance", "50%"],
+        ["Facility fee (e.g., ambulatory surgery center)", "copay", "$100/day"],
+        ["Facility fee (e.g., ambulatory surgery center)", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Physician/surgeon fees", "coinsurance", "40%"],
+        ["Physician/surgeon fees", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "copay", ""],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "20%"],
+        ["Facility fee (e.g., hospital room)", "coinsurance", "40%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500"],
+        ["Plan", "deductible (family)", "$1,000"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible for individual and family
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as per the provided rules, which focus on extracting numeric values and meaningful attributes.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500"],
+        ["Plan", "deductible (family)", "$1,000"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$300"],
+        ["Plan", "family deductible", "$300"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500"],
+        ["Plan", "out-of-pocket limit (in-network, family)", "$5,000"],
+        ["Plan", "out-of-pocket limit (out-of-network, family)", "$4,000"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care services", "cost-sharing", "No"],
+        ["Primary care services", "cost-sharing", "Yes, copayment or coinsurance may apply"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$300"],
+        ["Plan", "family deductible", "$300"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500"],
+        ["Plan", "out-of-pocket limit (in-network, family)", "$5,000"],
+        ["Plan", "out-of-pocket limit (out-of-network, family)", "$4,000"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care services", "cost-sharing", "No"],
+        ["Primary care services", "cost-sharing", "Yes, copayment or coinsurance may apply"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance-billed charges", "not specified"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "required to see specialist", "yes"],
+        ["Plan", "coverage", "some or all of the costs"],
+        ["Specialist visit", "requirement", "referral"]
+    ]
+}
+```
+
+However, to better fit the requested format and provide more accurate information, I can reorganize it as follows:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual out-of-pocket limit", "$8,000"],
+        ["Plan", "family out-of-pocket limit", "$4,000"],
+        ["Out-of-network provider", "balance-billed charges", "variable"],
+        ["In-network provider", "cost comparison", "lower"],
+        ["Out-of-network provider", "cost comparison", "higher"],
+        ["Specialist visit", "referral requirement", "yes"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$4,000"],
+        ["Plan", "out-of-pocket limit (family)", "$8,000"],
+        ["Out-of-network provider", "balance-billed charges", "not specified"],
+        ["In-network provider", "cost", "less"],
+        ["Out-of-network provider", "cost", "most"],
+        ["Referral", "required to see specialist", "yes"],
+        ["Plan", "coverage", "some or all of the costs"],
+        ["Specialist visit", "requirement", "referral"]
+    ]
+}
+
+
+However, to better fit the requested format and provide more accurate information, I can reorganize it as follows:
+
+
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual out-of-pocket limit", "$8,000"],
+        ["Plan", "family out-of-pocket limit", "$4,000"],
+        ["Out-of-network provider", "balance-billed charges", "variable"],
+        ["In-network provider", "cost comparison", "lower"],
+        ["Out-of-network provider", "cost comparison", "higher"],
+        ["Specialist visit", "referral requirement", "yes"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+```
+
+Note that I've extracted the numeric values and meaningful attributes as per the rules. I've also tried to categorize the attributes in a way that makes sense, using the service type (e.g. "Primary care visit", "Specialist visit", etc.) as the entity, and the specific attribute (e.g. "copay", "coinsurance", etc.) as the attribute name. Let me know if you have any further questions or if you'd like me to clarify anything!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "coinsurance", "40%"]
+    ]
+}
+```
+
+Note that some of the entities and attributes could be further categorized or grouped, but based on the provided text and rules, the above JSON represents the extracted information.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Urgent care", "coinsurance", "40%"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "coinsurance", "40%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+I extracted the following attributes:
+
+- Deductible amounts for individual and family plans
+- Coverage period start and end dates
+- Plan type (PPO)
+
+Note that I did not extract any entities or relationships as they were not explicitly mentioned in the provided text. Let me know if you need further assistance!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500/Individual"],
+        ["Plan", "deductible", "$1,000/Family"],
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care", "cost-sharing", "No"],
+        ["Primary care", "copayment or coinsurance", "Yes"],
+        ["Plan", "annual deductible", "Varies"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$2,500"],
+        ["Plan", "family deductible", "$5,000"],
+        ["Plan", "out-of-pocket limit (in-network)", "$2,500 (individual) / $5,000 (family)"],
+        ["Plan", "out-of-pocket limit (out-of-network)", "$4,000 (family)"],
+        ["Prescription drug", "deductible", "$300"],
+        ["Occupational therapy services", "deductible", "$300"],
+        ["Preventive care", "cost-sharing", "No"],
+        ["Primary care", "copayment or coinsurance", "Yes"],
+        ["Plan", "annual deductible", "Varies"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$8,000"],
+        ["Plan", "out-of-pocket limit (family)", "$4,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+```
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value triples:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$4,000"],
+        ["Plan", "individual out-of-pocket limit", "$8,000"],
+        ["Out-of-network provider", "balance billing", "yes"],
+        ["In-network provider", "cost savings", "yes"],
+        ["Specialist visit", "referral required", "yes"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "out-of-pocket limit", "$8,000"],
+        ["Plan", "out-of-pocket limit (family)", "$4,000"],
+        ["Out-of-network provider", "balance bill", "yes"],
+        ["In-network provider", "cost", "less"],
+        ["Referral", "required to see specialist", "yes"]
+    ]
+}
+
+
+However, to better fit the provided example, here's an alternative version with more specific entity-attribute-value triples:
+
+
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "family out-of-pocket limit", "$4,000"],
+        ["Plan", "individual out-of-pocket limit", "$8,000"],
+        ["Out-of-network provider", "balance billing", "yes"],
+        ["In-network provider", "cost savings", "yes"],
+        ["Specialist visit", "referral required", "yes"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+```
+
+Note that I've extracted the numeric values and meaningful attributes as per the rules. I've also tried to categorize the attributes in a way that makes sense, using the service type (e.g. "Primary care visit", "Specialist visit", etc.) as the entity, and the specific attribute (e.g. "copay", "coinsurance", etc.) as the attribute name. Let me know if you have any further questions or if you'd like me to clarify anything!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Primary care visit", "copay", "$35"],
+        ["Primary care visit", "coinsurance", "20%"],
+        ["Specialist visit", "copay", "$50"],
+        ["Specialist visit", "coinsurance", "40%"],
+        ["Preventive care", "charge", "$0"],
+        ["Diagnostic test", "copay", "$10"],
+        ["Diagnostic test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Preauthorization failure", "benefit reduction", "50%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "facility fee coinsurance", "40%"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Test", "copay", "$10"],
+        ["Test", "coinsurance", "40%"],
+        ["Imaging", "copay", "$50"],
+        ["Imaging", "coinsurance", "40%"],
+        ["Prescription", "copay", "$10"],
+        ["Generic drugs", "coinsurance", "40%"],
+        ["Preferred brand drugs", "coinsurance", "40%"],
+        ["Non-preferred brand drugs", "coinsurance", "40%"],
+        ["Specialty drugs", "coinsurance", "50%"],
+        ["Facility fee", "copay", "$100/day"],
+        ["Physician/surgeon fees", "coinsurance", "20%"],
+        ["Anesthesia", "coinsurance", "50%"],
+        ["Emergency room care", "coinsurance", "20%"],
+        ["Emergency medical transportation", "coinsurance", "20%"],
+        ["Urgent care", "copay", "$30"],
+        ["Hospital stay", "coinsurance", "20%"],
+        ["Hospital stay", "facility fee coinsurance", "40%"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "type", "PPO"],
+        ["Plan", "coverage for", "Family"]
+    ]
+}
+```
+
+Note that there are no numeric values like `$500` or `20%` in the provided text, so no such attributes are extracted. The extracted attributes are based on the available information in the text. If more text is provided, additional attributes can be extracted.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "type", "PPO"],
+        ["Plan", "coverage for", "Family"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$500"],
+        ["Plan", "family deductible", "$1,000"],
+        ["Prescription drug", "cost", "$300"],
+        ["Preventive care services", "cost-sharing", "None"],
+        ["Primary care services", "coverage", "Before deductible"]
+    ]
+}
+```
+
+Note that I've extracted the following attributes:
+
+* Individual and family deductible amounts
+* Prescription drug cost
+* Cost-sharing for preventive care services (which is none)
+* Coverage for primary care services (which is before deductible)
+
+Let me know if you'd like me to extract any further information!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$500"],
+        ["Plan", "family deductible", "$1,000"],
+        ["Prescription drug", "cost", "$300"],
+        ["Preventive care services", "cost-sharing", "None"],
+        ["Primary care services", "coverage", "Before deductible"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "deductible for specific coverage", "$300"],
+        ["Plan", "out-of-pocket limit for network providers", "$2,500"],
+        ["Plan", "out-of-pocket limit for individual", "$5,000"],
+        ["Plan", "out-of-pocket limit for family", "$5,000"],
+        ["Plan", "out-of-pocket limit for individual out-of-network", "$4,000"],
+        ["Plan", "out-of-pocket limit for family out-of-network", "$8,000"]
+    ]
+}
+```
+
+Note that I've extracted the numeric values and meaningful attributes from the text, such as deductibles, out-of-pocket limits, and copayments. I've also tried to categorize the attributes under the "Plan" entity, as the text appears to be describing a health insurance plan. Let me know if you have any further questions or if you'd like me to clarify any of the extracted attributes!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "deductible for specific coverage", "$300"],
+        ["Plan", "out-of-pocket limit for network providers", "$2,500"],
+        ["Plan", "out-of-pocket limit for individual", "$5,000"],
+        ["Plan", "out-of-pocket limit for family", "$5,000"],
+        ["Plan", "out-of-pocket limit for individual out-of-network", "$4,000"],
+        ["Plan", "out-of-pocket limit for family out-of-network", "$8,000"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "applies"],
+        ["Out-of-network provider", "billing", "balance bill for the difference between the provider's charge and what your plan pays"],
+        ["Network provider", "services", "may use an out-of-network provider for some services"],
+        ["Specialist visit", "requirement", "referral required"],
+        ["Copayment and coinsurance costs", "condition", "after overall deductible has been met"]
+    ]
+}
+```
+
+However, since there are no explicit numeric values mentioned in the text, the attributes extracted are more focused on the rules and conditions of the plan. If you'd like to extract more specific information, please let me know and I can try to help further. 
+
+Also, note that some of the attributes might not fit perfectly into the requested format, as the text doesn't provide explicit entity-attribute-value triples. The extracted attributes are based on the context and the information provided in the text. 
+
+If you need any further assistance, please let me know.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "applies"],
+        ["Out-of-network provider", "billing", "balance bill for the difference between the provider's charge and what your plan pays"],
+        ["Network provider", "services", "may use an out-of-network provider for some services"],
+        ["Specialist visit", "requirement", "referral required"],
+        ["Copayment and coinsurance costs", "condition", "after overall deductible has been met"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"],
+        ["Plan", "coverage for", "Family"]
+    ]
+}
+```
+
+Note that there are no numeric values like `$500` or `20%` in the provided text, so no such attributes are extracted. The extracted attributes are based on the available information in the text. If more text is provided, more attributes can be extracted.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Plan", "plan type", "PPO"],
+        ["Plan", "coverage for", "Family"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$500"],
+        ["Plan", "family deductible", "$1,000"],
+        ["Prescription drug", "cost", "$300"],
+        ["Preventive care services", "cost-sharing", "None"],
+        ["Primary care services", "coverage", "Before deductible"]
+    ]
+}
+```
+
+Note that I've extracted the following attributes:
+
+* Individual and family deductible amounts
+* Prescription drug cost
+* Cost-sharing for preventive care services (which is none)
+* Coverage for primary care services (which is before deductible)
+
+Let me know if you'd like me to extract any further information!
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "individual deductible", "$500"],
+        ["Plan", "family deductible", "$1,000"],
+        ["Prescription drug", "cost", "$300"],
+        ["Preventive care services", "cost-sharing", "None"],
+        ["Primary care services", "coverage", "Before deductible"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "deductible for specific coverage", "$300"],
+        ["Plan", "out-of-pocket limit for network providers", "$2,500"],
+        ["Plan", "out-of-pocket limit for individual", "$5,000"],
+        ["Plan", "out-of-pocket limit for family", "$5,000"],
+        ["Plan", "out-of-pocket limit for out-of-network providers individual", "$4,000"],
+        ["Plan", "out-of-pocket limit for out-of-network providers family", "$8,000"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "prescription drug deductible", "$300"],
+        ["Plan", "deductible for specific coverage", "$300"],
+        ["Plan", "out-of-pocket limit for network providers", "$2,500"],
+        ["Plan", "out-of-pocket limit for individual", "$5,000"],
+        ["Plan", "out-of-pocket limit for family", "$5,000"],
+        ["Plan", "out-of-pocket limit for out-of-network providers individual", "$4,000"],
+        ["Plan", "out-of-pocket limit for out-of-network providers family", "$8,000"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "overall deductible"],
+        ["Out-of-network provider", "billing", "balance bill for the difference between the provider's charge and what your plan pays"],
+        ["Network provider", "referral requirement", "yes, for specialist services"],
+        ["Specialist services", "coverage", "some or all of the costs, with referral"],
+        ["Copayment and coinsurance", "condition", "after deductible has been met, if applicable"]
+    ]
+}
+```
+
+Note: Since there are no explicit numeric values mentioned in the text, the attributes extracted are based on the meaningful information provided. If you'd like me to revise anything, please let me know.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "overall deductible"],
+        ["Out-of-network provider", "billing", "balance bill for the difference between the provider's charge and what your plan pays"],
+        ["Network provider", "referral requirement", "yes, for specialist services"],
+        ["Specialist services", "coverage", "some or all of the costs, with referral"],
+        ["Copayment and coinsurance", "condition", "after deductible has been met, if applicable"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Office Visit", "copay", "$35"],
+        ["Office Visit", "coinsurance", "20%"],
+        ["Specialist Visit", "copay", "$50"],
+        ["Specialist Visit", "coinsurance", "40%"],
+        ["Preventive Care", "charge", "$0"],
+        ["Diagnostic Test", "copay", "$10"],
+        ["Diagnostic Test", "coinsurance", "40%"],
+        ["Out-of-Network Provider", "coinsurance", "40%"],
+        ["Plan", "deductible", "not applicable for primary care visit"],
+        ["Preauthorization", "penalty", "50% reduction in benefits"]
+    ]
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Office Visit", "copay", "$35"],
+        ["Office Visit", "coinsurance", "20%"],
+        ["Specialist Visit", "copay", "$50"],
+        ["Specialist Visit", "coinsurance", "40%"],
+        ["Preventive Care", "charge", "$0"],
+        ["Diagnostic Test", "copay", "$10"],
+        ["Diagnostic Test", "coinsurance", "40%"],
+        ["Out-of-Network Provider", "coinsurance", "40%"],
+        ["Plan", "deductible", "not applicable for primary care visit"],
+        ["Preauthorization", "penalty", "50% reduction in benefits"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Insurance Company", "name", "Insurance Company 1"],
+        ["Plan", "name", "Plan Option 1"]
+    ]
+}
+```
+
+Note that there are no numeric values like `$500` or `20%` in the provided text, so no such attributes are extracted. The extracted attributes are based on the available information in the text. If more text is provided, more attributes can be extracted.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period start", "1/1/2017"],
+        ["Plan", "coverage period end", "12/31/2017"],
+        ["Insurance Company", "name", "Insurance Company 1"],
+        ["Plan", "name", "Plan Option 1"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here is the extracted information in the requested JSON format:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Coverage", "type", "Family"],
+        ["Plan", "type", "PPO"]
+    ]
+}
+```
+
+Note that there are no numeric values in the provided text, so no numeric attributes are extracted. The extracted attributes are "type" for both "Coverage" and "Plan" entities, with values "Family" and "PPO" respectively.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Coverage", "type", "Family"],
+        ["Plan", "type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Since the provided text does not contain any meaningful attributes or numeric values, the output will be empty. Here is the JSON output:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible_individual", "$500"],
+        ["Plan", "deductible_family", "$1,000"]
+    ]
+}
+```
+
+This JSON object captures the meaningful attributes mentioned in the text, specifically the deductible amounts for individual and family plans.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible_individual", "$500"],
+        ["Plan", "deductible_family", "$1,000"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible type", "individual"],
+        ["Plan", "deductible type", "family"],
+        ["Service", "coverage", "Preventive care"],
+        ["Service", "coverage", "primary care"],
+        ["Deductible", "requirement", "must be met before coverage"]
+    ]
+}
+```
+
+However, since there are no explicit numeric values mentioned in the provided text, the attributes extracted are based on the context and the information provided. If more text is provided, more attributes and numeric values can be extracted. 
+
+For example, if the text mentioned a specific deductible amount, it could be extracted as:
+
+```json
+["Plan", "deductible amount", "$500"]
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible type", "individual"],
+        ["Plan", "deductible type", "family"],
+        ["Service", "coverage", "Preventive care"],
+        ["Service", "coverage", "primary care"],
+        ["Deductible", "requirement", "must be met before coverage"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+To extract structured information from the provided text, we first need to clean and parse the HTML content. However, the given text does not contain explicit numeric values or meaningful attributes that can be directly extracted as per the rules provided. The text seems to be a part of an HTML document, possibly a template or a fragment, and does not include specific details like deductibles, percentages, or other quantifiable attributes that could be extracted.
+
+Given the nature of the text, which appears to be more structural and less content-rich in terms of specific plan details, insurance coverage, or financial attributes, the extraction of structured information as requested is limited. The text primarily sets up a layout for a document that might discuss insurance plan details but does not provide the actual details itself.
+
+Therefore, based on the provided text, the JSON output reflecting the extraction of structured information would be minimal, as there are no explicit numeric values or meaningful attributes directly mentioned in the content:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+}
+```
+
+This response indicates that, based on the rules provided and the content of the text, there are no entities, relationships, or attributes that can be extracted and represented in the requested JSON format. If the text were to include specific details such as deductibles, coverage percentages, or other quantifiable attributes, these could be extracted and represented accordingly.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period", "1/1/2017 - 12/31/2017"],
+        ["Plan", "coverage for", "Family"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+```
+
+Note that there are no numeric values (like $500, 20%, etc.) in the provided text, so no such attributes are extracted. The extracted attributes are based on the available information in the text. If more text is provided, additional attributes might be extracted.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "coverage period", "1/1/2017 - 12/31/2017"],
+        ["Plan", "coverage for", "Family"],
+        ["Plan", "plan type", "PPO"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Since the provided text does not contain any meaningful numeric values or attributes, the extracted information will be empty. Here is the JSON output:
+
+```
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+}
+```
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": []
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500"],
+        ["Plan", "family deductible", "$1,000"]
+    ]
+}
+```
+
+This JSON object captures the meaningful attributes mentioned in the text, specifically the deductible amounts for individual and family plans.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "deductible", "$500"],
+        ["Plan", "family deductible", "$1,000"]
+    ]
+}
+
+--- RAW LLM OUTPUT ---
+Here's the extracted information in the requested JSON format:
+
+```json
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "has_pre_deductible_care", "Yes"],
+        ["Preventive care", "coverage_timing", "before deductible"],
+        ["Primary care services", "coverage_timing", "before deductible"]
+    ]
+}
+```
+
+Note: Since there are no explicit numeric values or specific entities mentioned in the provided text, the extracted attributes focus on the descriptive information about the plan and its coverage. If more text or context were provided, additional attributes and entities might be extracted.
+
+--- CLEANED JSON ---
+{
+    "entities": [],
+    "relationships": [],
+    "attributes": [
+        ["Plan", "has_pre_deductible_care", "Yes"],
+        ["Preventive care", "coverage_timing", "before deductible"],
+        ["Primary care services", "coverage_timing", "before deductible"]
+    ]
+}
