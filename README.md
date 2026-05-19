@@ -123,8 +123,8 @@ GRAPHRAGFINAL/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/GRAPHRAGFINAL.git
-cd GRAPHRAGFINAL
+git clone https://github.com/your-username/project_of_graphrag_byusing_visonllm.git
+cd project_of_graphrag_byusing_visonllm
 ```
 
 ### 2. Create a Virtual Environment
